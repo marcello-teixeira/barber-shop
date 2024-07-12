@@ -1,27 +1,38 @@
-﻿using BarberShop_Api.Domain.Models;
+﻿using BarberShop_Api.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BarberShop_Api.Infrastructure.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        public void Delete(int id)
+
+        private readonly ConnectionContext _context;
+        private readonly DbSet<T> _dbSet;
+
+        public Repository(ConnectionContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _dbSet = context.Set<T>();
         }
 
-        public T Get(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var entity = _dbSet.Find(id) ?? throw new Exception("ID entered is null or no such");
+
+
+            _dbSet.Remove(entity);
+            _context.SaveChanges();
         }
 
         public void Post(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Add(entity);
+            _context.SaveChanges();
         }
 
-        public void Update(T up_entity)
+        public List<T> Get()
         {
-            throw new NotImplementedException();
+            return _dbSet.ToList();
         }
     }
 }

@@ -1,10 +1,9 @@
-﻿namespace BarberShop_Api.Domain.Models
+﻿namespace BarberShop_Api.Domain.Repositories
 {
     public interface IRepository<T> where T : class
     {
-        T Get(int id);
+        List<T> Get();
         void Post(T entity);
-        void Update(T up_entity);
         void Delete(int id);
     }
 }
