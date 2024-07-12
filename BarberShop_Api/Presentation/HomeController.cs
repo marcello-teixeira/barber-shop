@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BarberShop_Api.Domain.Models;
+using BarberShop_Api.Domain.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BarberShop_Api.Presentation
 {
-    public class HomeController : Controller
+    [Route("/")]
+    [ApiController]
+    public partial class HomeController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly IRepository<CustomerModel> _customerRepository;
+        private readonly IRepository<BusinessModel> _businessRepository;
+
+        public HomeController(IRepository<CustomerModel> customerRepository, IRepository<BusinessModel> businessRepository)
         {
-            return View();
+            _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
+            _businessRepository = businessRepository ?? throw new ArgumentNullException(nameof(businessRepository));
         }
+
+
     }
 }
