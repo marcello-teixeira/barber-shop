@@ -1,5 +1,5 @@
 ﻿using BarberShop_Api.Application.Services;
-using BarberShop_Api.Application.ViewModel.CustomerViewModel;
+using BarberShop_Api.Application.ViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +20,12 @@ namespace BarberShop_Api.Presentation
         }
 
 
-        [Route("CustomerLogin")]
+        [Route("Login")]
         [HttpPost]
-        public IActionResult AuthenticationCustomer([FromForm] CompanyViewLogin view)
+        public IActionResult AuthenticationCustomer([FromForm] ViewLogin view)
         {
             var customers = _customerRepository.Get();
+            var companies = _companyRepository.Get();
 
             foreach(var customer in customers)
             {
@@ -35,25 +36,17 @@ namespace BarberShop_Api.Presentation
                 }
             }
 
-            return BadRequest("User or password invalid");
-        }
-
-        [Route("CompanyLogin")]
-        [HttpPost]
-        public IActionResult AuthenticationCompany([FromForm] CompanyViewLogin view)
-        {
-            List<CompanyModel> companies = _companyRepository.Get();
-
-            foreach (CompanyModel company in companies)
+            foreach(var company in companies)
             {
-                if (company.Login == view.Login && company.Password == view.Password)
+                if (company.Name == view.Login  && company.Password == view.Password)
                 {
-                    object token = TokenService.GenerateTokenCompany(company);
+                    object token = TokenService.GenerateTokenCustomer(company);
                     return Ok(token);
                 }
             }
 
             return BadRequest("User or password invalid");
         }
+
     }
 }
