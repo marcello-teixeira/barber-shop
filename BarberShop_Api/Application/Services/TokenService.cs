@@ -17,7 +17,7 @@ namespace BarberShop_Api.Application.Services
                 Subject = new ClaimsIdentity(new Claim[] 
                 {
                     new Claim("CustomerId", entity.Id.ToString()),
-                    new Claim("CustomerName", entity.LoginName.ToString()),
+                    new Claim("CustomerName", entity.Name.ToString()),
                     new Claim("CustomerCPF", entity.CPF.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(50),

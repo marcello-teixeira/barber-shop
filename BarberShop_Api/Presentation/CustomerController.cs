@@ -32,11 +32,11 @@ namespace BarberShop_Api.Presentation
 
             _customerRepository.Post(new CustomerModel(
                 Id: view.Id,
-                LoginName: view.LoginName,
+                Name: view.LoginName,
                 CPF: view.CPF,
                 Photo: view.Photo,
                 Email: view.Email,
-                LoginPassword: view.LoginPassword,
+                Password: view.LoginPassword,
                 Phone: view.Phone
             ));
 
