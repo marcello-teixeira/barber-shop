@@ -1,4 +1,4 @@
-﻿using BarberShop_Api.Application.ViewModel;
+﻿using BarberShop_Api.Application.ViewModel.CustomerViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -15,7 +15,7 @@ namespace BarberShop_Api.Presentation
         //
 
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("get/custumer")]
         public IActionResult GetCustomersEntity()
         {
@@ -26,17 +26,17 @@ namespace BarberShop_Api.Presentation
 
 
         [HttpPost("post/customer")]
-        public IActionResult PostCustomerEntity([FromForm]CustomerViewModel view)
+        public IActionResult AddCustomerEntity([FromForm]CustomerViewPost view)
         {
             view.Photo ??= "";
 
-            _customerRepository.Post(new CustomerModel(
+            _customerRepository.Add(new CustomerModel(
                 Id: view.Id,
-                Name: view.LoginName,
+                Name: view.Name,
                 CPF: view.CPF,
                 Photo: view.Photo,
                 Email: view.Email,
-                Password: view.LoginPassword,
+                Password: view.Password,
                 Phone: view.Phone
             ));
 

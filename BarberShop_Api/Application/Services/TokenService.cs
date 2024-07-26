@@ -31,7 +31,7 @@ namespace BarberShop_Api.Application.Services
             return new { Secrettoken };
         }
 
-        public static object GenerateTokenBusiness(BusinessModel entity)
+        public static object GenerateTokenCompany(CompanyModel entity)
         {
             byte[] key = Encoding.Default.GetBytes(Key.Private);
 
@@ -39,7 +39,7 @@ namespace BarberShop_Api.Application.Services
             {
                 Subject = new ClaimsIdentity(new Claim[] {
                     new Claim("CompanyId", entity.Id.ToString()),
-                    new Claim("CompanyName", entity.LoginName.ToString()),
+                    new Claim("CompanyName", entity.Name.ToString()),
                     new Claim("CompanyCPNJ", entity.CNPJ.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(50),

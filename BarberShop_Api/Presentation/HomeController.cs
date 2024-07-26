@@ -9,12 +9,12 @@ namespace BarberShop_Api.Presentation
     public partial class HomeController : ControllerBase
     {
         private readonly IRepository<CustomerModel> _customerRepository;
-        private readonly IRepository<BusinessModel> _businessRepository;
+        private readonly IRepository<CompanyModel> _companyRepository;
 
-        public HomeController(IRepository<CustomerModel> customerRepository, IRepository<BusinessModel> businessRepository)
+        public HomeController(IRepository<CustomerModel> customerRepository, IRepository<CompanyModel> companyRepository)
         {
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
-            _businessRepository = businessRepository ?? throw new ArgumentNullException(nameof(businessRepository));
+            _companyRepository = companyRepository ?? throw new ArgumentNullException(nameof(companyRepository));
         }
 
 
