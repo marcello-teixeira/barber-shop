@@ -24,7 +24,7 @@ namespace BarberShop_Api.Infrastructure.Repository
             _context.SaveChanges();
         }
 
-        public void Post(T entity)
+        public void Add(T entity)
         {
             _dbSet.Add(entity);
             _context.SaveChanges();
