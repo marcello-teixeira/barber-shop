@@ -136,3 +136,4 @@ C:\Users\marce\source\repos\BarberShop_Api\BarberShop_Api\obj\Debug\net8.0\Barbe
 C:\Users\marce\source\repos\BarberShop_Api\BarberShop_Api\obj\Debug\net8.0\BarberShop_Api.genruntimeconfig.cache
 C:\Users\marce\source\repos\BarberShop_Api\BarberShop_Api\obj\Debug\net8.0\ref\BarberShop_Api.dll
 C:\Users\marce\source\repos\BarberShop_Api\BarberShop_Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\marce\source\repos\BarberShop_Api\BarberShop_Api\obj\Debug\net8.0\BarberShop_Api.sourcelink.json

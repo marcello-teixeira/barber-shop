@@ -8,50 +8,40 @@ namespace BarberShop_Api.Application.Services
 {
     public class TokenService
     {
-        public static object GenerateTokenCustomer(CustomerModel entity)
+        public static object GenerateTokenCustomer<T>(T entity)
         {
             byte[] key = Encoding.Default.GetBytes(Key.Private);
 
+            List<Claim> claims = new();
+
+            foreach(var prop in typeof(T).GetProperties())
+            {
+                var value = prop.GetValue(entity)?.ToString();
+                if (value != null)
+                {
+                    claims.Add(new Claim(prop.Name, value));
+                }
+            }
+
             var OptionsToken = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[] 
-                {
-                    new Claim("CustomerId", entity.Id.ToString()),
-                    new Claim("CustomerName", entity.Name.ToString()),
-                    new Claim("CustomerCPF", entity.CPF.ToString())
-                }),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddMinutes(50),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var HandlerToken = new JwtSecurityTokenHandler();
             var token = HandlerToken.CreateToken(OptionsToken);
-            string Secrettoken = HandlerToken.WriteToken(token);
+            string SecretToken = HandlerToken.WriteToken(token);
 
-            return new { Secrettoken };
+            return new { SecretToken };
         }
 
-        public static object GenerateTokenCompany(CompanyModel entity)
-        {
-            byte[] key = Encoding.Default.GetBytes(Key.Private);
 
-            var OptionsToken = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[] {
-                    new Claim("CompanyId", entity.Id.ToString()),
-                    new Claim("CompanyName", entity.Name.ToString()),
-                    new Claim("CompanyCPNJ", entity.CNPJ.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddMinutes(50),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
-            };
 
-            var HandlerToken = new JwtSecurityTokenHandler();
-            var token = HandlerToken.CreateToken(OptionsToken);
-            string Secrettoken = HandlerToken.WriteToken(token);
 
-            return new { Secrettoken };
-        }
+
+
 
 
 
