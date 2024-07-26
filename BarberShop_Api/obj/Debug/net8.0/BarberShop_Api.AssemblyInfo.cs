@@ -16,6 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ae0c3968c7acad4d3bb2147e5967990aaf9c66b")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f93edfd8e645bf77c4622a3527ed65956abaf186")]
@@ -23,6 +24,9 @@ using System.Reflection;
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9bb582012a8bc2d8b91e3bd815637b0de80d8707")]
 >>>>>>> 66fd895 (Name property orders altered)
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66fd8954d76f52a30f8003f0f0e3ec1370760ab4")]
+>>>>>>> 0d524ca (Altered property models and views)
 [assembly: System.Reflection.AssemblyProductAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

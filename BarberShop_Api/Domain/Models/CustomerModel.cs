@@ -9,9 +9,8 @@ namespace BarberShop_Api.Domain.Models
         public CustomerModel()
         {
         }
-        public CustomerModel(int Id, string Name, string CPF, string Photo, string Email, string Password, string Phone)
+        public CustomerModel(string Name, string CPF, string Photo, string Email, string Password, string Phone)
         {
-            this.Id = Id;
             this.Name = Name;
             this.CPF = CPF;
             this.Photo = Photo;

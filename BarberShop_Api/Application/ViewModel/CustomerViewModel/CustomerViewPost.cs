@@ -2,7 +2,6 @@
 {
     public class CustomerViewPost
     {
-        public required int Id { get; set; }
         public required string Name { get; set; }
         public required string CPF { get; set; }
         public string? Photo { get; set; }

@@ -28,13 +28,11 @@ namespace BarberShop_Api.Presentation
         [HttpPost("post/customer")]
         public IActionResult AddCustomerEntity([FromForm]CustomerViewPost view)
         {
-            view.Photo ??= "";
 
             _customerRepository.Add(new CustomerModel(
-                Id: view.Id,
                 Name: view.Name,
                 CPF: view.CPF,
-                Photo: view.Photo,
+                Photo: view.Photo ??= "picture",
                 Email: view.Email,
                 Password: view.Password,
                 Phone: view.Phone
