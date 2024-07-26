@@ -1,7 +1,9 @@
 ﻿using BarberShop_Api.Application.ViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Permissions;
 
 namespace BarberShop_Api.Presentation
 {
@@ -12,6 +14,8 @@ namespace BarberShop_Api.Presentation
         // Customer Controller
         //
 
+
+        [Authorize]
         [HttpGet("get/custumer")]
         public IActionResult GetCustomersEntity()
         {
