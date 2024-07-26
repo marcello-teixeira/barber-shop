@@ -2,7 +2,6 @@
 {
     public class CompanyViewPost
     {
-        public int Id { get; set; }
         public required string Name { get; set; }
         public required string Location { get; set; }
         public required string Login { get; set; }

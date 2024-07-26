@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9bb582012a8bc2d8b91e3bd815637b0de80d8707")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66fd8954d76f52a30f8003f0f0e3ec1370760ab4")]
 [assembly: System.Reflection.AssemblyProductAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -24,12 +24,11 @@ namespace BarberShop_Api.Presentation
         public IActionResult AddCompanyEntity([FromForm] CompanyViewPost view)
         {
             _companyRepository.Add(new CompanyModel(
-                Id: view.Id,
                 Name: view.Name,
                 Location: view.Location,
                 Login: view.Login,
                 CNPJ: view.CNPJ,
-                Photo: view.Photo,
+                Photo: view.Photo ??= "picture",
                 Email: view.Email,
                 Password: view.Password,
                 Phone: view.Phone,

@@ -6,9 +6,8 @@ namespace BarberShop_Api.Domain.Models
     [Table("Company")]
     public class CompanyModel
     {
-        public CompanyModel(int Id, string Name, string Location, string Login, string CNPJ, string Photo, string Email, string Password, string Phone, bool ActiveAgender)
+        public CompanyModel(string Name, string Location, string Login, string CNPJ, string Photo, string Email, string Password, string Phone, bool ActiveAgender)
         {
-            this.Id = Id;
             this.Name = Name;
             this.Location = Location;
             this.Login = Login;
