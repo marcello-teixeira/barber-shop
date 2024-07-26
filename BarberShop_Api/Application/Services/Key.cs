@@ -15,7 +15,7 @@ namespace BarberShop_Api.Application.Services
 
             for (int i = 0; i < Chars.Length; i++)
             {
-                int index =random.Next(Chars.Length);
+                int index = random.Next(Chars.Length);
 
                 BuilderKey.Append(Chars[index]);
 

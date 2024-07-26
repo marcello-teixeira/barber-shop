@@ -18,7 +18,7 @@ namespace BarberShop_Api.Application.Services
                 {
                     new Claim("CustomerId", entity.Id.ToString()),
                     new Claim("CustomerName", entity.LoginName.ToString()),
-                    new Claim("Acess", entity.CPF.ToString())
+                    new Claim("CustomerCPF", entity.CPF.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(50),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -38,9 +38,9 @@ namespace BarberShop_Api.Application.Services
             var OptionsToken = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[] {
-                    new Claim("Customer_Id", entity.Id.ToString()),
-                    new Claim("Customer_Name", entity.LoginName.ToString()),
-                    new Claim("Acess", entity.CNPJ.ToString())
+                    new Claim("CompanyId", entity.Id.ToString()),
+                    new Claim("CompanyName", entity.LoginName.ToString()),
+                    new Claim("CompanyCPNJ", entity.CNPJ.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(50),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
