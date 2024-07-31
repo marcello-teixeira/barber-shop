@@ -15,8 +15,7 @@ namespace BarberShop_Api.Presentation
         //
 
 
-        //[Authorize]
-        [HttpGet("get/custumer")]
+        [HttpGet("get/customer")]
         public IActionResult GetCustomersEntity()
         {
             var customers = _customerRepository.Get();
@@ -41,7 +40,8 @@ namespace BarberShop_Api.Presentation
             return Ok();
         }
 
-        [HttpDelete("delete/custumer")]
+        [Authorize]
+        [HttpDelete("delete/customer")]
         public IActionResult DeleteCustomerEntity(int id)
         {
             try

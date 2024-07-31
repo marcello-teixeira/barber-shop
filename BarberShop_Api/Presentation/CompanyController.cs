@@ -8,7 +8,7 @@ namespace BarberShop_Api.Presentation
     public partial class HomeController : ControllerBase
     {
         //
-        //  Business Controller 
+        //  Company Controller 
         //
 
         [HttpGet("get/company")]

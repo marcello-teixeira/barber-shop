@@ -49,6 +49,16 @@ builder.Services.AddSwaggerGen(x =>
     });
 });
 
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy(name: "DefaultPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:9000");
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
+});
+
 builder.Services.AddAuthentication(opt =>
 {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -74,6 +84,8 @@ builder.Services.AddDbContext<ConnectionContext>(options => options.UseSqlServer
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
+
+app.UseCors("DefaultPolicy");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

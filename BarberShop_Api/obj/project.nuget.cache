@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1arEocZ3uqmdS5N88cNs69Lwkc/6zR+fbhxNVkX3el14r5jAvLtS+LId1aXCDk/E4uvqI9mUNNA+OncLxFPKPA==",
+  "dgSpecHash": "uzmspHzgO5KP7oN9EKvAGUMVgFmN5lmcnaCKem6ZetyLBwYuk6sUEAB86yhgQ6HAgBJGKgiE6sA8+CLkPAeb8w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marce\\source\\repos\\BarberShop_Api\\BarberShop_Api\\BarberShop_Api.csproj",
+  "projectFilePath": "C:\\Users\\marce\\source\\repos\\BarberShop\\BarberShop_Api\\BarberShop_Api\\BarberShop_Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marce\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\marce\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
