@@ -31,7 +31,8 @@ namespace BarberShop_Api.Presentation
             {
                 if (customer.Name == view.Login && customer.Password == view.Password)
                 {
-                    object token = TokenService.GenerateTokenCustomer(customer);
+                    var token = TokenService.GenerateTokenCustomer(customer);
+
                     return Ok(token);
                 }
             }
