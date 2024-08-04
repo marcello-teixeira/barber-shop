@@ -23,12 +23,20 @@ namespace BarberShop_Api.Presentation
         [HttpPost("post/company")]
         public IActionResult AddCompanyEntity([FromForm] CompanyViewPost view)
         {
+            string pathString = "Storage/profileDefault.jpg";
+
+            if (view.Photo is not null)
+            {
+                _companyRepository.UploadArchive(view.Photo, view.CNPJ);
+            }
+
+
             _companyRepository.Add(new CompanyModel(
                 Name: view.Name,
                 Location: view.Location,
                 Login: view.Login,
                 CNPJ: view.CNPJ,
-                Photo: view.Photo ??= "picture",
+                Photo: pathString,
                 Email: view.Email,
                 Password: view.Password,
                 Phone: view.Phone,
