@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BarberShop_Api.Presentation
 {
     [ApiController]
-    [Route("/[controller]/")]
+    [Route("/authentication/")]
     public class AuthenticationController : ControllerBase
     {
         private readonly IRepository<CustomerModel> _customerRepository;
@@ -20,7 +20,7 @@ namespace BarberShop_Api.Presentation
         }
 
 
-        [Route("Login")]
+        [Route("login")]
         [HttpPost]
         public IActionResult AuthenticationCustomer(ViewLogin view)
         {

@@ -9,34 +9,37 @@ using System.Security.Permissions;
 
 namespace BarberShop_Api.Presentation
 {
-
-    public partial class HomeController : ControllerBase
+    [Route("/customer/")]
+    [ApiController]
+    public class CustomerController : ControllerBase
     {
-        //
-        // Customer Controller
-        //
+
+        private readonly IRepository<CustomerModel> _customerRepository;
+
+        public CustomerController(IRepository<CustomerModel> customerRepository)
+        {
+            _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
+        }
 
         [Authorize]
-        [HttpGet("get/customer")]
+        [HttpGet("get")]
         public IActionResult GetCustomersEntity()
         {
-            //var customers = _customerRepository.Get();
+            var customers = _customerRepository.Get();
 
-            var claim = TokenService.GetClaims();
-
-            return Ok(claim);
+            return Ok(customers);
         }
 
 
 
-        [HttpPost("post/customer")]
+        [HttpPost("post")]
         public  IActionResult  AddCustomerEntity([FromForm]CustomerViewPost view)
         {
             string pathPhoto = "Storage/profileDefault";
 
             if (view.Photo is not null)
             {
-                pathPhoto = _companyRepository.UploadArchive(view.Photo, view.CPF);
+                pathPhoto = _customerRepository.UploadArchive(view.Photo, view.CPF);
             }
 
             _customerRepository.Add(new CustomerModel(
@@ -52,7 +55,7 @@ namespace BarberShop_Api.Presentation
         }
 
         [Authorize]
-        [HttpDelete("delete/customer")]
+        [HttpDelete("delete")]
         public IActionResult DeleteCustomerEntity(int id)
         {
             try
