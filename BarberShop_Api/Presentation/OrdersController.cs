@@ -17,24 +17,27 @@ namespace BarberShop_Api.Presentation
             _ordersRepository = ordersRepository ?? throw new ArgumentNullException(nameof(ordersRepository));
         }
 
-
-        [HttpGet("get")]
-        public IActionResult GetAllOrdersCompany()
+        [HttpGet]
+        public IActionResult GetAllOrdersCustomer()
         {
             var orders = _ordersRepository.Get();
-            /*var claims = TokenService.GetClaims();
+            var claims = TokenService.GetClaims();
 
-            string idCompany = claims.First(item => item.Type == "Id").Value;
+            string id = claims.First(item => item.Type == "Id").Value;
 
             List<OrdersModel> ordersMatchCompany = new();
 
             foreach (var order in orders)
             {
-                if (order.CompanyID.ToString() == idCompany)
+                if (order.CompanyID.ToString() == id)
                 {
                     ordersMatchCompany.Add(order);
                 }
-            }*/
+                if (order.CustomerID.ToString() == id)
+                { 
+                    ordersMatchCompany.Add(order);
+                }
+            }
 
             return Ok(orders);
         }
