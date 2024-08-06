@@ -42,10 +42,10 @@ namespace BarberShop_Api.Application.Services
 
         public static IEnumerable<Claim> GetClaims()
         {
-            var handlerJwt = new JwtSecurityTokenHandler();
-            var claimJwt = handlerJwt.ReadJwtToken(tokenJwtClaim);
+            var HandlerToken = new JwtSecurityTokenHandler();
+            var GetToken = HandlerToken.ReadJwtToken(tokenJwtClaim);
 
-            return claimJwt.Claims;
+            return GetToken.Claims;
         }
     }
 }

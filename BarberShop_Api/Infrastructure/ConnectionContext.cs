@@ -8,6 +8,8 @@ namespace BarberShop_Api.Infrastructure
     {
         public DbSet<CustomerModel> Customers { get; set; }
         public DbSet<CompanyModel> Companies { get; set; }
+        public DbSet<OrdersModel> Orders { get; set; }
+        public DbSet<HaircutModel> Haircuts { get; set; }
 
         public ConnectionContext(DbContextOptions<ConnectionContext> options) : base(options)
         {

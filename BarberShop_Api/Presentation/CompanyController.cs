@@ -5,13 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BarberShop_Api.Presentation
 {
-    public partial class HomeController : ControllerBase
+    [Route("/company/")]
+    [ApiController]
+    public class CompanyController : ControllerBase
     {
-        //
-        //  Company Controller 
-        //
+        private readonly IRepository<CompanyModel> _companyRepository;
 
-        [HttpGet("get/company")]
+        public CompanyController(IRepository<CompanyModel> companyRepository)
+        {
+            _companyRepository = companyRepository ?? throw new ArgumentNullException(nameof(companyRepository));
+        }
+
+        [HttpGet("get")]
         public IActionResult GetCompanyEntity()
         {
             var companies = _companyRepository.Get();
@@ -20,7 +25,7 @@ namespace BarberShop_Api.Presentation
 
 
 
-        [HttpPost("post/company")]
+        [HttpPost("post")]
         public IActionResult AddCompanyEntity([FromForm] CompanyViewPost view)
         {
             string pathString = "Storage/profileDefault.jpg";
@@ -47,7 +52,7 @@ namespace BarberShop_Api.Presentation
             return Ok();
         }
 
-        [HttpDelete("delete/company")]
+        [HttpDelete("delete")]
         public IActionResult DeleteCompanyEntity(int id)
         {
             try
