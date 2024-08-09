@@ -19,10 +19,10 @@ namespace BarberShop_Api.Presentation
         }
 
 
-        [HttpGet]
-        public IActionResult GetAllHaircuts()
+        [HttpGet("customers/{id}")]
+        public IActionResult GetAllHaircutsToCustomer(int id)
         {
-            List<HaircutModel> haircuts = _haircutRepository.Get();
+            List<HaircutModel> haircuts = _haircutRepository.Get(id, "CompanyID");
 
             return Ok(haircuts);
         }

@@ -5,7 +5,10 @@ using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Security.Permissions;
+using System.Text;
+
 
 namespace BarberShop_Api.Presentation
 {
@@ -22,7 +25,7 @@ namespace BarberShop_Api.Presentation
         }
 
         [Authorize]
-        [HttpGet("get")]
+        [HttpGet]
         public IActionResult GetCustomersEntity()
         {
             var customers = _customerRepository.Get();
@@ -30,9 +33,43 @@ namespace BarberShop_Api.Presentation
             return Ok(customers);
         }
 
+        [Authorize]
+        [HttpGet("{id}")]
+        public IActionResult GetCustomer(int id)
+        {
+            var customers = _customerRepository.Get(id);
+
+            return Ok(customers);
+        }
+
+        [Authorize]
+        [HttpGet("photo/{id}")]
+        public IActionResult GetPhotoCustomer(int id)
+        {
+            byte[] photo = Encoding.Default.GetBytes("");
+
+            var customer = _customerRepository.Get(id);
+            
+
+            try
+            {
+                if (customer == null || Directory.Exists(customer.Photo))
+                {
+                    return BadRequest();
+                }
+                photo = System.IO.File.ReadAllBytes(customer.Photo);
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return File(photo, "image/jpeg");
+        }
 
 
-        [HttpPost("post")]
+
+        [HttpPost]
         public  IActionResult  AddCustomerEntity([FromForm]CustomerViewPost view)
         {
             string pathPhoto = "Storage/profileDefault";
@@ -55,7 +92,7 @@ namespace BarberShop_Api.Presentation
         }
 
         [Authorize]
-        [HttpDelete("delete")]
+        [HttpDelete]
         public IActionResult DeleteCustomerEntity(int id)
         {
             try

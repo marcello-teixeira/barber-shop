@@ -1,6 +1,9 @@
 ﻿using BarberShop_Api.Domain.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Reflection;
+using System.Text;
 
 namespace BarberShop_Api.Infrastructure.Repository
 {
@@ -31,9 +34,31 @@ namespace BarberShop_Api.Infrastructure.Repository
             _context.SaveChanges();
         }
 
-        public List<T> Get()
+        public List<T> Get() => _dbSet.ToList();
+
+        public T? Get(int id=0) => _dbSet.Find(id);
+
+        public List<T> Get(int id, string column)
         {
-            return _dbSet.ToList();
+            var idProperty = typeof(T).GetProperties().First(props => props.Name == column);
+
+            if (idProperty == null)
+            {
+                return new List<T>();
+            }
+
+            return _dbSet.ToList().Where(entity =>
+            {
+                var value = idProperty.GetValue(entity);
+
+                if (value != null && Convert.ToInt32(value) == id)
+                {
+                    return true;
+                }
+
+                return false;
+            }).ToList();
+
         }
 
         public string UploadArchive(IFormFile file, string doc)
@@ -61,6 +86,22 @@ namespace BarberShop_Api.Infrastructure.Repository
             
             return pathPhoto;
         }
+
+        public void Patch(int id, dynamic info, string column)
+        {
+            var entity = _dbSet.Find(id) ?? throw new Exception("ID entered is null or no such");
+
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                if (prop.Name == column)
+                {
+                    prop.SetValue(entity, info);
+                    _context.SaveChanges();
+                }
+            }            
+        }
+
+
 
     }
 }

@@ -32,9 +32,11 @@ namespace BarberShop_Api.Presentation
                 if (customer.Name == view.Login && customer.Password == view.Password)
                 {
                     var token = TokenService.GenerateTokenCustomer(customer);
+                    string role = "customer";
 
-                    return Ok(token);
+                    return Ok(new { token, role, customer.Id });
                 }
+
             }
 
             foreach(var company in companies)
@@ -42,11 +44,14 @@ namespace BarberShop_Api.Presentation
                 if (company.Name == view.Login  && company.Password == view.Password)
                 {
                     object token = TokenService.GenerateTokenCustomer(company);
-                    return Ok(token);
+                    string role = "company";
+
+                    return Ok(new { token, role, company.Id });
                 }
             }
 
             return BadRequest("User or password invalid");
+
         }
 
     }

@@ -1,10 +1,7 @@
 ﻿namespace BarberShop_Api.Application.ViewModel.OrdersViewModel
 {
-    public class OrdersViewPost
+    public class AddNewOrderView
     {
-        public int CustomerID { get;  set; }
-        public string CustomerName { get;  set; }
-        public string CustomerPhone { get;  set; }
         public int CompanyID { get;  set; }
         public string CompanyName { get;  set; }
         public string CompanyPhone { get;  set; }

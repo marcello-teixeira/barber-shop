@@ -8,7 +8,7 @@ namespace BarberShop_Api.Application.Services
 {
     public class TokenService
     {
-        private static string? tokenJwtClaim;
+        private static string? tokenJwt;
 
         public static object GenerateTokenCustomer<T>(T entity)
         {
@@ -35,15 +35,15 @@ namespace BarberShop_Api.Application.Services
             var HandlerToken = new JwtSecurityTokenHandler();
             var token = HandlerToken.CreateToken(OptionsToken);
 
-            tokenJwtClaim = HandlerToken.WriteToken(token);
+            tokenJwt = HandlerToken.WriteToken(token);
 
-            return new { tokenJwtClaim };
+            return new { tokenJwt };
         }
 
         public static IEnumerable<Claim> GetClaims()
         {
             var HandlerToken = new JwtSecurityTokenHandler();
-            var GetToken = HandlerToken.ReadJwtToken(tokenJwtClaim);
+            var GetToken = HandlerToken.ReadJwtToken(tokenJwt);
 
             return GetToken.Claims;
         }

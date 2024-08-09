@@ -16,7 +16,7 @@ namespace BarberShop_Api.Presentation
             _companyRepository = companyRepository ?? throw new ArgumentNullException(nameof(companyRepository));
         }
 
-        [HttpGet("get")]
+        [HttpGet]
         public IActionResult GetCompanyEntity()
         {
             var companies = _companyRepository.Get();
@@ -25,7 +25,7 @@ namespace BarberShop_Api.Presentation
 
 
 
-        [HttpPost("post")]
+        [HttpPost]
         public IActionResult AddCompanyEntity([FromForm] CompanyViewPost view)
         {
             string pathString = "Storage/profileDefault.jpg";
@@ -39,20 +39,19 @@ namespace BarberShop_Api.Presentation
             _companyRepository.Add(new CompanyModel(
                 Name: view.Name,
                 Location: view.Location,
-                Login: view.Login,
                 CNPJ: view.CNPJ,
                 Photo: pathString,
                 Email: view.Email,
                 Password: view.Password,
                 Phone: view.Phone,
-                ActiveAgender: false
+                AvaliableAgenda: true
                 ));
             
 
             return Ok();
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete]
         public IActionResult DeleteCompanyEntity(int id)
         {
             try
