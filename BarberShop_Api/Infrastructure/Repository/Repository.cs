@@ -62,15 +62,14 @@ namespace BarberShop_Api.Infrastructure.Repository
         }
 
         public string UploadArchive(IFormFile file, string doc)
-        {
-            if(!Directory.Exists($"Storage/{doc}/"))
-            {
-                Directory.CreateDirectory($"Storage/{doc}/");
-            }
+        {           
+            Directory.Delete($"Storage/{doc}/", true);
+            Directory.CreateDirectory($"Storage/{doc}/");
 
             string pathPhoto = Path.Combine($"Storage/{doc}/", file.FileName);
 
             var stream = new FileStream(pathPhoto, FileMode.Create);
+
             try
             {
                 file.CopyTo(stream);

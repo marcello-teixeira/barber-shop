@@ -56,7 +56,7 @@ namespace BarberShop_Api.Presentation
 
         [Authorize]
         [HttpPost("new")]
-        public IActionResult AddNewOrder(AddNewOrderView view)
+        public IActionResult AddNewOrder(OrderAdd view)
         {
 
             var claims = TokenService.GetClaims();

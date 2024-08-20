@@ -4,6 +4,7 @@ using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Permissions;
@@ -67,7 +68,43 @@ namespace BarberShop_Api.Presentation
             return File(photo, "image/jpeg");
         }
 
+        [Authorize]
+        [HttpPatch("photo")]
+        public IActionResult ChangePhotoCustomer([FromForm] CustomerPatchPhoto view)
+        {
+            var claims = TokenService.GetClaims();
 
+            if( claims == null)
+            {
+                return BadRequest("Claims is null");
+            }
+
+            string customerCPF = claims.First(claim => claim.Type == "CPF").Value;
+            int customerID = Convert.ToInt32(claims.First(claim => claim.Type == "Id").Value);
+            
+            string pathPhoto = "";
+
+            try
+            {
+                if (view.Photo == null)
+                {
+                    return BadRequest("Customer or photo is null");
+                }
+
+                pathPhoto = _customerRepository.UploadArchive(view.Photo, customerCPF);
+
+                if (!pathPhoto.IsNullOrEmpty())
+                {
+                    _customerRepository.Patch(customerID, pathPhoto, "Photo");
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+       
+            return Ok();
+        }
 
         [HttpPost]
         public  IActionResult  AddCustomerEntity([FromForm]CustomerViewPost view)

@@ -28,7 +28,7 @@ namespace BarberShop_Api.Presentation
         }
 
         [HttpPost]
-        public IActionResult Addhaircut(HaircutViewPost view)
+        public IActionResult Addhaircut(HaircutAdd view)
         {
             var companyId = TokenService.GetClaims().First(claim => claim.Type == "Id").Value;
 

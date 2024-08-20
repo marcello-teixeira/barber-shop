@@ -1,13 +1,13 @@
 ﻿namespace BarberShop_Api.Application.ViewModel.OrdersViewModel
 {
-    public class AddNewOrderView
+    public class OrderAdd
     {
         public int CompanyID { get;  set; }
-        public string CompanyName { get;  set; }
-        public string CompanyPhone { get;  set; }
-        public string CompanyLocation { get;  set; }
+        public required string CompanyName { get;  set; }
+        public required string CompanyPhone { get;  set; }
+        public required string CompanyLocation { get;  set; }
         public int HaircutID { get;  set; }
-        public string HaircutName { get;  set; }
+        public required string HaircutName { get;  set; }
         public decimal HaircutCost { get;  set; }
         public DateTime HaircutDate { get;  set; }
     }
