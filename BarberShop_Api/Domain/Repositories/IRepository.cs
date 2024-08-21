@@ -6,8 +6,8 @@ namespace BarberShop_Api.Domain.Repositories
     public interface IRepository<T> where T : class
     {
         List<T> Get(int id, string column);
-        T? Get(int id);
         List<T> Get();
+        T? GetByClaim();
 
         void Add(T entity);
         void Delete(int id);

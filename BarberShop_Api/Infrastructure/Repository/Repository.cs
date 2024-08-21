@@ -1,4 +1,5 @@
-﻿using BarberShop_Api.Domain.Repositories;
+﻿using BarberShop_Api.Application.Services;
+using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -36,7 +37,19 @@ namespace BarberShop_Api.Infrastructure.Repository
 
         public List<T> Get() => _dbSet.ToList();
 
-        public T? Get(int id=0) => _dbSet.Find(id);
+        public T? GetByClaim()
+        {
+            var claims = TokenService.GetClaims();
+
+            if(claims == null)
+            {
+                return null;
+            }
+
+            int id = Convert.ToInt32(claims.First(item => item.Type == "Id").Value);
+
+            return _dbSet.Find(id);
+        }
 
         public List<T> Get(int id, string column)
         {
@@ -62,8 +75,10 @@ namespace BarberShop_Api.Infrastructure.Repository
         }
 
         public string UploadArchive(IFormFile file, string doc)
-        {           
-            Directory.Delete($"Storage/{doc}/", true);
+        {
+            if (Directory.Exists($"Storage/{doc}/")) {
+                Directory.Delete($"Storage/{doc}/", true);
+            }
             Directory.CreateDirectory($"Storage/{doc}/");
 
             string pathPhoto = Path.Combine($"Storage/{doc}/", file.FileName);

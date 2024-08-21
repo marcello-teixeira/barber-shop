@@ -1,6 +1,6 @@
 ﻿namespace BarberShop_Api.Application.ViewModel.CompanyViewModel
 {
-    public class CompanyViewPost
+    public class CompanyAdd
     {
         public required string Name { get; set; }
         public required string Location { get; set; }

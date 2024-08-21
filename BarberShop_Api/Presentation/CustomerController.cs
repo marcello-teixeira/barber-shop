@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
 namespace BarberShop_Api.Presentation
@@ -35,67 +36,62 @@ namespace BarberShop_Api.Presentation
         }
 
         [Authorize]
-        [HttpGet("{id}")]
-        public IActionResult GetCustomer(int id)
+        [HttpGet("own")]
+        public IActionResult GetCustomer()
         {
-            var customers = _customerRepository.Get(id);
+            var customers = _customerRepository.GetByClaim();
 
             return Ok(customers);
         }
 
         [Authorize]
-        [HttpGet("photo/{id}")]
-        public IActionResult GetPhotoCustomer(int id)
+        [HttpGet("get-photo")]
+        public IActionResult GetPhotoCustomer()
         {
-            byte[] photo = Encoding.Default.GetBytes("");
+            byte[] photo = [];
 
-            var customer = _customerRepository.Get(id);
-            
+            var customer = _customerRepository.GetByClaim();
 
             try
             {
-                if (customer == null || Directory.Exists(customer.Photo))
+                if (customer == null)
                 {
-                    return BadRequest();
+                    return BadRequest("Customer doesn't exist");
                 }
                 photo = System.IO.File.ReadAllBytes(customer.Photo);
             }
             catch (FileNotFoundException e)
             {
                 Console.WriteLine(e.Message);
+                return NotFound("File not found");
+            }
+            catch(DirectoryNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+                return NotFound("Directory not found");
             }
 
             return File(photo, "image/jpeg");
         }
 
         [Authorize]
-        [HttpPatch("photo")]
+        [HttpPatch("patch-photo")]
         public IActionResult ChangePhotoCustomer([FromForm] CustomerPatchPhoto view)
         {
-            var claims = TokenService.GetClaims();
+            var customer = _customerRepository.GetByClaim();
 
-            if( claims == null)
+            if(customer == null || view.Photo == null)
             {
-                return BadRequest("Claims is null");
+                return BadRequest("Customer aren't exist or photo is null");
             }
-
-            string customerCPF = claims.First(claim => claim.Type == "CPF").Value;
-            int customerID = Convert.ToInt32(claims.First(claim => claim.Type == "Id").Value);
-            
-            string pathPhoto = "";
-
+                        
             try
             {
-                if (view.Photo == null)
-                {
-                    return BadRequest("Customer or photo is null");
-                }
-
-                pathPhoto = _customerRepository.UploadArchive(view.Photo, customerCPF);
+               string pathPhoto = _customerRepository.UploadArchive(view.Photo, customer.CPF);
 
                 if (!pathPhoto.IsNullOrEmpty())
                 {
-                    _customerRepository.Patch(customerID, pathPhoto, "Photo");
+                    _customerRepository.Patch(customer.Id, pathPhoto, "Photo");
                 }
             }
             catch(Exception e)
@@ -107,7 +103,7 @@ namespace BarberShop_Api.Presentation
         }
 
         [HttpPost]
-        public  IActionResult  AddCustomerEntity([FromForm]CustomerViewPost view)
+        public IActionResult AddCustomerEntity([FromForm]CustomerViewPost view)
         {
             string pathPhoto = "Storage/profileDefault";
 

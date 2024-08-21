@@ -26,6 +26,7 @@ using System.Reflection;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ae0c3968c7acad4d3bb2147e5967990aaf9c66b")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f93edfd8e645bf77c4622a3527ed65956abaf186")]
@@ -63,6 +64,9 @@ using System.Reflection;
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0dec96d114ecc0fc590a1265c8c601499c8a63ef")]
 >>>>>>> 4754357 (Add change profile photo)
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+47543577d0f7eb06d12d9e2b4c7ed482b12bf3f4")]
+>>>>>>> f2c1c8c (route patch profile photo add)
 [assembly: System.Reflection.AssemblyProductAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
