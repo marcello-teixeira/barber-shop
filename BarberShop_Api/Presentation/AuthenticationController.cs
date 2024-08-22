@@ -34,9 +34,8 @@ namespace BarberShop_Api.Presentation
                     var token = TokenService.GenerateTokenCustomer(customer);
                     string role = "customer";
 
-                    return Ok(new { token, role, customer.Id });
+                    return Ok(new { token, role});
                 }
-
             }
 
             foreach(var company in companies)
@@ -46,7 +45,7 @@ namespace BarberShop_Api.Presentation
                     object token = TokenService.GenerateTokenCustomer(company);
                     string role = "company";
 
-                    return Ok(new { token, role, company.Id });
+                    return Ok(new { token, role });
                 }
             }
 

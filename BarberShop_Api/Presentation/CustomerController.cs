@@ -10,7 +10,9 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Text;
+using AutoMapper;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using BarberShop_Api.Application.DataTransfer;
 
 
 namespace BarberShop_Api.Presentation
@@ -21,34 +23,42 @@ namespace BarberShop_Api.Presentation
     {
 
         private readonly IRepository<CustomerModel> _customerRepository;
+        private readonly IMapper _mapper;
 
-        public CustomerController(IRepository<CustomerModel> customerRepository)
+        public CustomerController(IRepository<CustomerModel> customerRepository, IMapper mapper)
         {
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(customerRepository)); 
         }
 
+        [Authorize]
         [HttpGet]
-        public IActionResult GetCustomersEntity()
+        public IActionResult GetAllCustomers()
         {
             var customers = _customerRepository.Get();
+            List<CustomerDataTransfer> customerDataTrasnfer = new();
+            foreach(var customer in customers)
+            {
+                customerDataTrasnfer.Add(_mapper.Map<CustomerDataTransfer>(customer));
+            }
 
-            return Ok(customers);
+            return Ok(customerDataTrasnfer);
         }
 
         [Authorize]
         [HttpGet("own")]
         public IActionResult GetCustomer()
         {
-            var customers = _customerRepository.GetByClaim();
+            var customer = _customerRepository.GetByClaim();
 
-            return Ok(customers);
+            return Ok(customer);
         }
 
         [Authorize]
         [HttpGet("get-photo")]
         public IActionResult GetPhotoCustomer()
         {
-            byte[] photo = [];
+            byte[] photo;
 
             var customer = _customerRepository.GetByClaim();
 
@@ -141,23 +151,25 @@ namespace BarberShop_Api.Presentation
         }
 
         [HttpPost("verify-doc")]
-        public IActionResult VerifyDoc(string document)
+        public IActionResult VerifyDoc(DocumentView view)
         {
             var customers = _customerRepository.Get();
             bool isAvaliable;
 
             foreach (var customer in customers)
             {
-                if (customer.CPF == document)
+                if (customer.CPF == view.Document)
                 {
                     return Ok(false);
                 }
             }
 
-            isAvaliable = VerifyDocument.Verify(document);
+            isAvaliable = VerifyDocument.Verify(view.Document);
 
             return Ok(isAvaliable);
         }
+
+
 
 
     }

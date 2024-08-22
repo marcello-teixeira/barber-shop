@@ -1,4 +1,5 @@
 ﻿using BarberShop_Api.Application.ViewModel;
+using BarberShop_Api.Application.DataTransfer;
 using BarberShop_Api.Application.ViewModel.CompanyViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
@@ -6,6 +7,7 @@ using BarberShop_Api.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
 
 namespace BarberShop_Api.Presentation
 {
@@ -14,18 +16,29 @@ namespace BarberShop_Api.Presentation
     public class CompanyController : ControllerBase
     {
         private readonly IRepository<CompanyModel> _companyRepository;
+        private readonly IMapper _mapper;
 
-        public CompanyController(IRepository<CompanyModel> companyRepository)
+
+        public CompanyController(IRepository<CompanyModel> companyRepository, IMapper mapper)
         {
             _companyRepository = companyRepository ?? throw new ArgumentNullException(nameof(companyRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [Authorize]
         [HttpGet]
-        public IActionResult GetCompanyEntity()
+        public IActionResult GetAllCompanies()
         {
             var companies = _companyRepository.Get();
-            return Ok(companies);
+            List<CompanyDataTransfer> companiesDataTransfer = new();
+
+            foreach (var item in companies)
+            {
+                companiesDataTransfer.Add(_mapper.Map<CompanyDataTransfer>(item));
+            }
+
+
+            return Ok(companiesDataTransfer);
         }
 
         [Authorize]
@@ -138,25 +151,25 @@ namespace BarberShop_Api.Presentation
             return Ok($"Customer °{id} has been deleted");
         }
 
-        [Authorize]
         [HttpPost("verify-doc")]
-        public IActionResult VerifyDoc(string document)
+        public IActionResult VerifyDoc(DocumentView view)
         {
             var companies = _companyRepository.Get();
             bool isAvaliable;
 
             foreach(var company in companies)
             {
-                if(company.CNPJ == document)
+                if(company.CNPJ == view.Document)
                 {
                     return Ok(false);
                 }
             }
 
-            isAvaliable = VerifyDocument.Verify(document);
+            isAvaliable = VerifyDocument.Verify(view.Document);
 
             return Ok(isAvaliable);
         }
+
 
     }
 }

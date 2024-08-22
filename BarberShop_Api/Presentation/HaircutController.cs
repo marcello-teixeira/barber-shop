@@ -1,7 +1,10 @@
-﻿using BarberShop_Api.Application.Services;
+﻿using AutoMapper;
+using BarberShop_Api.Application.DataTransfer;
+using BarberShop_Api.Application.Services;
 using BarberShop_Api.Application.ViewModel.HaircutViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarberShop_Api.Presentation
@@ -12,21 +15,30 @@ namespace BarberShop_Api.Presentation
     {
 
         private readonly IRepository<HaircutModel> _haircutRepository;
+        private readonly IMapper _mapper;
 
-        public HaircutController(IRepository<HaircutModel> haircutRepository)
+        public HaircutController(IRepository<HaircutModel> haircutRepository, IMapper mapper)
         {
             _haircutRepository = haircutRepository ?? throw new ArgumentNullException(nameof(haircutRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-
+        [Authorize]
         [HttpGet("customers/{id}")]
         public IActionResult GetAllHaircutsToCustomer(int id)
         {
-            List<HaircutModel> haircuts = _haircutRepository.Get(id, "CompanyID");
+            var haircuts = _haircutRepository.Get(id, "CompanyID");
+            List<HaircutDataTransfer> haircutDataTransfer = new();
 
-            return Ok(haircuts);
+            foreach(var haircut in haircuts)
+            {
+                haircutDataTransfer.Add(_mapper.Map<HaircutDataTransfer>(haircut));
+            }
+
+            return Ok(haircutDataTransfer);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Addhaircut(HaircutAdd view)
         {

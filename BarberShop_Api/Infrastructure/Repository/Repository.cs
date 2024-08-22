@@ -57,7 +57,7 @@ namespace BarberShop_Api.Infrastructure.Repository
 
             if (idProperty == null)
             {
-                return new List<T>();
+                return [];
             }
 
             return _dbSet.ToList().Where(entity =>

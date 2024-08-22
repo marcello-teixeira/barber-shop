@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using BarberShop_Api.Domain.Models;
+using System.Collections.Generic;
 
 namespace BarberShop_Api.Application.Services
 {
@@ -42,6 +43,11 @@ namespace BarberShop_Api.Application.Services
 
         public static IEnumerable<Claim> GetClaims()
         {
+            if(tokenJwt == null)
+            {
+                return [];
+            }
+
             var HandlerToken = new JwtSecurityTokenHandler();
             var GetToken = HandlerToken.ReadJwtToken(tokenJwt);
 

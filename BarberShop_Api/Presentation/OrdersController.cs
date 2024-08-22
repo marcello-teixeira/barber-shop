@@ -1,9 +1,12 @@
 ﻿using BarberShop_Api.Application.Services;
 using BarberShop_Api.Application.ViewModel.OrdersViewModel;
 using BarberShop_Api.Domain.Models;
+using BarberShop_Api.Application.DataTransfer;
 using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace BarberShop_Api.Presentation
 {
@@ -12,45 +15,53 @@ namespace BarberShop_Api.Presentation
     public class OrdersController : ControllerBase
     {
         private readonly IRepository<OrdersModel> _ordersRepository;
+        private readonly IRepository<CustomerModel> _customerRepository;
+        private readonly IRepository<CompanyModel> _companyRepository;
+        private readonly IMapper _mapper;
 
-        public OrdersController(IRepository<OrdersModel> ordersRepository)
+        public OrdersController(IRepository<OrdersModel> ordersRepository, IRepository<CustomerModel> customerRepository, IRepository<CompanyModel> companyRepository, IMapper mapper)
         {
             _ordersRepository = ordersRepository ?? throw new ArgumentNullException(nameof(ordersRepository));
+            _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
+            _companyRepository = companyRepository ?? throw new ArgumentNullException(nameof(companyRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [Authorize]
         [HttpGet]
         public IActionResult GetAllOrders()
         {
-            var orders = _ordersRepository.Get();
+            var allOrders = _ordersRepository.Get();
+
             var claims = TokenService.GetClaims();
+            int idClient = Convert.ToInt32(claims.First(claim => claim.Type == "Id").Value);
 
-            int id = Convert.ToInt32(claims.First(item => item.Type == "Id").Value);
+            List<OrdersDataTransfer> ordersDataTransfer = new();
 
-            List<OrdersModel> ordersMatch = new();
-
-            foreach (var order in orders)
+            foreach (var order in allOrders)
             {
-                if (order.CompanyID == id)
+                if (order.CompanyID == idClient || order.CustomerID == idClient)
                 {
-                    ordersMatch.Add(order);
-                }
-                if (order.CustomerID == id)
-                { 
-                    ordersMatch.Add(order);
+                    ordersDataTransfer.Add(_mapper.Map<OrdersDataTransfer>(order));
                 }
             }
 
-            return Ok(ordersMatch);
+            return Ok(ordersDataTransfer);
         }
 
         [Authorize]
         [HttpGet("date/{id}")]
         public IActionResult GetAllOrdersToCheckDateCustomer(int id)
         {
-            List<OrdersModel> orders = _ordersRepository.Get(id, "CompanyID");          
+            var orders = _ordersRepository.Get(id, "CompanyID");
+            List<DateTime> dateOrders = new();
 
-            return Ok(orders);
+            foreach(var order in orders)
+            {
+                dateOrders.Add(order.HaircutDate);
+            }
+
+            return Ok(dateOrders);
         }
 
 
@@ -61,11 +72,14 @@ namespace BarberShop_Api.Presentation
 
             var claims = TokenService.GetClaims();
 
-          
+            int id = Convert.ToInt32(claims.First(prop => prop.Type == "Id").Value);
+            string name = claims.First(prop => prop.Type == "Name").Value;
+            string phone = claims.First(prop => prop.Type == "Phone").Value;
+
             _ordersRepository.Add(new OrdersModel(
-                CustomerID: Convert.ToInt32(claims.First(prop => prop.Type == "Id" ).Value),
-                CustomerName: claims.First(prop => prop.Type == "Name").Value,
-                CustomerPhone: claims.First(prop => prop.Type == "Phone").Value,
+                CustomerID: id,
+                CustomerName: name,
+                CustomerPhone: phone,
                 CompanyID: view.CompanyID,
                 CompanyName: view.CompanyName,
                 CompanyPhone: view.CompanyPhone,

@@ -21,7 +21,7 @@ namespace BarberShop_Api.Domain.Models
         [Key]
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public string Location { get; set; }
+        public string Location { get; private set; }
         public string CNPJ { get; private set; }
         public string Photo { get; private set; }
         public string Email { get; private set; }

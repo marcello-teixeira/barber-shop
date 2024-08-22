@@ -7,7 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using BarberShop_Api.Application.Services;
+using BarberShop_Api.Application.Mapping;
 using System.Text;
+using BarberShop_Api.Domain.Models;
+using BarberShop_Api.Application.DataTransfer;
 
 byte[] key = Encoding.Default.GetBytes(Key.Private);
 
@@ -49,11 +52,18 @@ builder.Services.AddSwaggerGen(x =>
     });
 });
 
+builder.Services.AddAutoMapper(typeof(CompanyMapping));
+builder.Services.AddAutoMapper(typeof(CustomerMapping));
+builder.Services.AddAutoMapper(typeof(HaircutMapping));
+builder.Services.AddAutoMapper(typeof(OrdersMapping));
+
+
+
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(name: "DefaultPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:9000");
+        policy.WithOrigins("http://localhost:9001");
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
     });
