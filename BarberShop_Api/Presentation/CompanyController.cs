@@ -1,13 +1,14 @@
 ﻿using BarberShop_Api.Application.ViewModel;
+using BarberShop_Api.Application.Services;
 using BarberShop_Api.Application.DataTransfer;
 using BarberShop_Api.Application.ViewModel.CompanyViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
-using BarberShop_Api.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
+
 
 namespace BarberShop_Api.Presentation
 {
@@ -119,6 +120,7 @@ namespace BarberShop_Api.Presentation
                 _companyRepository.UploadArchive(view.Photo, view.CNPJ);
             }
 
+            string EncriptedPassword = EncryptCode.TransformCode256Hash(view.Password);
 
             _companyRepository.Add(new CompanyModel(
                 Name: view.Name,
@@ -126,7 +128,7 @@ namespace BarberShop_Api.Presentation
                 CNPJ: view.CNPJ,
                 Photo: pathString,
                 Email: view.Email,
-                Password: view.Password,
+                Password: EncriptedPassword,
                 Phone: view.Phone,
                 AvaliableAgenda: true
                 ));

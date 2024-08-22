@@ -6,7 +6,6 @@ using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System.Text;
 
 namespace BarberShop_Api.Presentation
 {

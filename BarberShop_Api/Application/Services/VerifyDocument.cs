@@ -1,4 +1,4 @@
-﻿namespace BarberShop_Api.Infrastructure.Repository
+﻿namespace BarberShop_Api.Application.Services
 {
     public class VerifyDocument
     {

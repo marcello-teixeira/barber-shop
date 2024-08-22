@@ -27,20 +27,22 @@ namespace BarberShop_Api.Presentation
             var customers = _customerRepository.Get();
             var companies = _companyRepository.Get();
 
+
+            string DecryptPassword = EncryptCode.TransformCode256Hash(view.Password);
+
             foreach(var customer in customers)
             {
-                if (customer.Name == view.Login && customer.Password == view.Password)
+                if ((customer.Name == view.Login || customer.Email == view.Login) && customer.Password == DecryptPassword)
                 {
                     var token = TokenService.GenerateTokenCustomer(customer);
                     string role = "customer";
-
-                    return Ok(new { token, role});
+                    return Ok(new { token, role });
                 }
             }
 
-            foreach(var company in companies)
+            foreach (var company in companies)
             {
-                if (company.Name == view.Login  && company.Password == view.Password)
+                if ((company.Name == view.Login || company.Email == view.Login) && company.Password == DecryptPassword)
                 {
                     object token = TokenService.GenerateTokenCustomer(company);
                     string role = "company";
@@ -50,8 +52,9 @@ namespace BarberShop_Api.Presentation
             }
 
             return BadRequest("User or password invalid");
-
         }
+
+  
 
     }
 }

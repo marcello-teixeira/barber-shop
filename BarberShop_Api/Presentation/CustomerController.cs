@@ -2,17 +2,12 @@
 using BarberShop_Api.Application.ViewModel.CustomerViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
-using BarberShop_Api.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Security.Permissions;
-using System.Text;
 using AutoMapper;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using BarberShop_Api.Application.DataTransfer;
+using BarberShop_Api.Application.Services;
 
 
 namespace BarberShop_Api.Presentation
@@ -122,12 +117,14 @@ namespace BarberShop_Api.Presentation
                 pathPhoto = _customerRepository.UploadArchive(view.Photo, view.CPF);
             }
 
+            string EncripitedPassword = EncryptCode.TransformCode256Hash(view.Password);
+
             _customerRepository.Add(new CustomerModel(
                 Name: view.Name,
                 CPF: view.CPF,
                 Photo: pathPhoto,
                 Email: view.Email,
-                Password: view.Password,
+                Password: EncripitedPassword,
                 Phone: view.Phone
             ));
 
