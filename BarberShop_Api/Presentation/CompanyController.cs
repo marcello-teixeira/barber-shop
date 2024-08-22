@@ -1,8 +1,9 @@
-﻿using BarberShop_Api.Application.Services;
-using BarberShop_Api.Application.ViewModel.CompanyView;
+﻿using BarberShop_Api.Application.ViewModel;
 using BarberShop_Api.Application.ViewModel.CompanyViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
+using BarberShop_Api.Infrastructure.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -19,6 +20,7 @@ namespace BarberShop_Api.Presentation
             _companyRepository = companyRepository ?? throw new ArgumentNullException(nameof(companyRepository));
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetCompanyEntity()
         {
@@ -26,6 +28,7 @@ namespace BarberShop_Api.Presentation
             return Ok(companies);
         }
 
+        [Authorize]
         [HttpGet("own")]
         public IActionResult GetCompany()
         {
@@ -34,6 +37,7 @@ namespace BarberShop_Api.Presentation
             return Ok(company);
         }
 
+        [Authorize]
         [HttpGet("get-photo")]
         public IActionResult GetPhotoCompany()
         {
@@ -63,8 +67,9 @@ namespace BarberShop_Api.Presentation
             return File(bytePhoto, "image/jpg");
         }
 
+        [Authorize]
         [HttpPatch("patch-photo")]
-        public IActionResult PatchPhoto([FromForm] CompanyPatchPhoto view)
+        public IActionResult PatchPhoto([FromForm] PatchPhoto view)
         {
             var company = _companyRepository.GetByClaim();
 
@@ -117,7 +122,7 @@ namespace BarberShop_Api.Presentation
             return Ok();
         }
 
-
+        [Authorize]
         [HttpDelete]
         public IActionResult DeleteCompanyEntity(int id)
         {
@@ -131,6 +136,26 @@ namespace BarberShop_Api.Presentation
             }
 
             return Ok($"Customer °{id} has been deleted");
+        }
+
+        [Authorize]
+        [HttpPost("verify-doc")]
+        public IActionResult VerifyDoc(string document)
+        {
+            var companies = _companyRepository.Get();
+            bool isAvaliable;
+
+            foreach(var company in companies)
+            {
+                if(company.CNPJ == document)
+                {
+                    return Ok(false);
+                }
+            }
+
+            isAvaliable = VerifyDocument.Verify(document);
+
+            return Ok(isAvaliable);
         }
 
     }

@@ -1,7 +1,8 @@
-﻿using BarberShop_Api.Application.Services;
+﻿using BarberShop_Api.Application.ViewModel;
 using BarberShop_Api.Application.ViewModel.CustomerViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
+using BarberShop_Api.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -26,7 +27,6 @@ namespace BarberShop_Api.Presentation
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
         }
 
-        [Authorize]
         [HttpGet]
         public IActionResult GetCustomersEntity()
         {
@@ -76,7 +76,7 @@ namespace BarberShop_Api.Presentation
 
         [Authorize]
         [HttpPatch("patch-photo")]
-        public IActionResult ChangePhotoCustomer([FromForm] CustomerPatchPhoto view)
+        public IActionResult ChangePhotoCustomer([FromForm] PatchPhoto view)
         {
             var customer = _customerRepository.GetByClaim();
 
@@ -138,6 +138,25 @@ namespace BarberShop_Api.Presentation
             }
                        
             return Ok($"Customer °{id} has been deleted");
+        }
+
+        [HttpPost("verify-doc")]
+        public IActionResult VerifyDoc(string document)
+        {
+            var customers = _customerRepository.Get();
+            bool isAvaliable;
+
+            foreach (var customer in customers)
+            {
+                if (customer.CPF == document)
+                {
+                    return Ok(false);
+                }
+            }
+
+            isAvaliable = VerifyDocument.Verify(document);
+
+            return Ok(isAvaliable);
         }
 
 
