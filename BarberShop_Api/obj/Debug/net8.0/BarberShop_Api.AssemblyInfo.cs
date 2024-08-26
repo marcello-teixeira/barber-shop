@@ -34,6 +34,7 @@ using System.Reflection;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ae0c3968c7acad4d3bb2147e5967990aaf9c66b")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f93edfd8e645bf77c4622a3527ed65956abaf186")]
@@ -95,6 +96,9 @@ using System.Reflection;
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a99be0e936cb663d7d4b133e3827103a80fa7e6e")]
 >>>>>>> 2bfcd6f (Add notes)
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bfcd6f37bff5dd3d317aa8c9f9d4f54d444465a")]
+>>>>>>> 9730d73 (Alter gitignore)
 [assembly: System.Reflection.AssemblyProductAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

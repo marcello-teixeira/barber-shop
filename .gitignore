@@ -1,3 +1,7 @@
 .vs/
 
+*.AssemblyInfo.cs
+
+*.AssemblyInfo.cs
+
 *.env
