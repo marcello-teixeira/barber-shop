@@ -30,6 +30,7 @@ using System.Reflection;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ae0c3968c7acad4d3bb2147e5967990aaf9c66b")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f93edfd8e645bf77c4622a3527ed65956abaf186")]
@@ -79,6 +80,9 @@ using System.Reflection;
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c8e567d2461e66d2b0777b52fd41b6d0d193b1b")]
 >>>>>>> fd5f0ab (Encrypt password add)
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd5f0ab18693f2db002a53eec4a014faaccec198")]
+>>>>>>> a99be0e (Add enviroment varibles)
 [assembly: System.Reflection.AssemblyProductAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
