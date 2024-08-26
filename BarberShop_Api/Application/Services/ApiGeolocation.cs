@@ -9,7 +9,7 @@ namespace BarberShop_Api.Application.Services
             _latitude = latitude;
             _longitude = longitude;
 
-            // Carregue o .env apenas uma vez no início da aplicação
+            // Charge enviroment variables 
             DotEnv.Load();
 
             _apiKey = Environment.GetEnvironmentVariable("API_KEY") ?? "";
@@ -26,6 +26,7 @@ namespace BarberShop_Api.Application.Services
         private readonly string _latitude;
         private readonly string _longitude;
 
+        // Send latitude and longitude to API OpenCageData endpoint, then get the response.
         public async Task GetGeolocationAsync()
         {
            using(HttpClient client = new())
