@@ -2,24 +2,21 @@ using BarberShop_Api.Domain.Repositories;
 using BarberShop_Api.Infrastructure;
 using BarberShop_Api.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using BarberShop_Api.Application.Services;
 using BarberShop_Api.Application.Mapping;
 using System.Text;
-using BarberShop_Api.Domain.Models;
-using BarberShop_Api.Application.DataTransfer;
 
-byte[] key = Encoding.Default.GetBytes(Key.Private);
+
+byte[] key = Encoding.Default.GetBytes(GenerateKey.Private);
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(x =>
@@ -63,7 +60,7 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(name: "DefaultPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:9001");
+        policy.WithOrigins("http://localhost:9000");
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
     });

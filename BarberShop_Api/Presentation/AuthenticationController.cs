@@ -22,7 +22,7 @@ namespace BarberShop_Api.Presentation
 
         [Route("login")]
         [HttpPost]
-        public IActionResult AuthenticationCustomer(ViewLogin view)
+        public IActionResult AuthenticationCustomer(LoginView view)
         {
             var customers = _customerRepository.Get();
             var companies = _companyRepository.Get();

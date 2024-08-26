@@ -2,7 +2,7 @@
 
 namespace BarberShop_Api.Application.Services
 {
-    public class Key
+    public class GenerateKey
     {
         private const string Chars = "QWERTYUIOPÇLKJHGFDSAZXCVBNM1234567890abcdefghijklmnopqrstuvwxyz!@#$%¨&*()_+-?:.,";
         public static string Private { get; private set; } = GeneretedKey();

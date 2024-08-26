@@ -13,7 +13,7 @@ namespace BarberShop_Api.Application.Services
 
         public static object GenerateTokenCustomer<T>(T entity)
         {
-            byte[] key = Encoding.Default.GetBytes(Key.Private);
+            byte[] key = Encoding.Default.GetBytes(GenerateKey.Private);
 
             List<Claim> claims = new();
 

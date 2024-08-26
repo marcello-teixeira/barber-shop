@@ -277,3 +277,4 @@ C:\Users\marce\source\repos\BarberShop\BarberShop_Api\BarberShop_Api\obj\Debug\n
 C:\Users\marce\source\repos\BarberShop\BarberShop_Api\BarberShop_Api\obj\Debug\net8.0\BarberShop_Api.genruntimeconfig.cache
 C:\Users\marce\source\repos\BarberShop\BarberShop_Api\BarberShop_Api\obj\Debug\net8.0\ref\BarberShop_Api.dll
 C:\Users\marce\source\repos\BarberShop\BarberShop_Api\BarberShop_Api\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\marce\source\repos\BarberShop\BarberShop_Api\BarberShop_Api\bin\Debug\net8.0\dotenv.net.dll
