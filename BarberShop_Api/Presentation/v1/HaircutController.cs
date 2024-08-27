@@ -6,10 +6,11 @@ using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Asp.Versioning;
 
-namespace BarberShop_Api.Presentation
+namespace BarberShop_Api.Presentation.v1
 {
-    [Route("/haircut/")]
+    [Route("/v{version:ApiVersion}/haircut/")]
     [ApiController]
     public class HaircutController : ControllerBase
     {
@@ -30,7 +31,7 @@ namespace BarberShop_Api.Presentation
             var haircuts = _haircutRepository.Get(id, "CompanyID");
             List<HaircutDataTransfer> haircutDataTransfer = new();
 
-            foreach(var haircut in haircuts)
+            foreach (var haircut in haircuts)
             {
                 haircutDataTransfer.Add(_mapper.Map<HaircutDataTransfer>(haircut));
             }

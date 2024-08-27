@@ -8,6 +8,10 @@ using Microsoft.IdentityModel.Tokens;
 using BarberShop_Api.Application.Services;
 using BarberShop_Api.Application.Mapping;
 using System.Text;
+using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
+using BarberShop_Api.Application.SwaggerOptions;
+
 
 
 byte[] key = Encoding.Default.GetBytes(GenerateKey.Private);
@@ -16,11 +20,31 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddApiVersioning(opt =>
+{
+    opt.AssumeDefaultVersionWhenUnspecified = true;
+    opt.DefaultApiVersion = new ApiVersion(1, 0);
+
+
+}).AddMvc().AddApiExplorer(opt =>
+{
+    opt.GroupNameFormat = "'v'VVV";
+    opt.SubstituteApiVersionInUrl = true;
+});
+
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.ConfigureOptions<ConfigSwaggerGenOptions>();
+
+
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(x =>
 {
+    x.OperationFilter<SwaggerDefaultValues>();
+
     x.AddSecurityDefinition(
         "Bearer", new OpenApiSecurityScheme()
         {
@@ -92,18 +116,27 @@ builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
-app.UseCors("DefaultPolicy");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(opt =>
+    {
+        var apiInfo = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+        foreach(var info in apiInfo.ApiVersionDescriptions)
+        {
+            opt.SwaggerEndpoint($"/swagger/{info.GroupName}/swagger.json", $"BarberShop - {info.GroupName}");
+        }
+    });
 }
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("DefaultPolicy");
 
 app.MapControllers();
 

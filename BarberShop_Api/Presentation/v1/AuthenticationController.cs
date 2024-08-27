@@ -3,11 +3,12 @@ using BarberShop_Api.Application.ViewModel;
 using BarberShop_Api.Domain.Models;
 using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Asp.Versioning;
 
-namespace BarberShop_Api.Presentation
+namespace BarberShop_Api.Presentation.v1
 {
     [ApiController]
-    [Route("/authentication/")]
+    [Route("/v{version:ApiVersion}/authentication/")]
     public class AuthenticationController : ControllerBase
     {
         private readonly IRepository<CustomerModel> _customerRepository;
@@ -30,7 +31,7 @@ namespace BarberShop_Api.Presentation
 
             string DecryptPassword = EncryptCode.TransformCode256Hash(view.Password);
 
-            foreach(var customer in customers)
+            foreach (var customer in customers)
             {
                 if ((customer.Name == view.Login || customer.Email == view.Login) && customer.Password == DecryptPassword)
                 {
@@ -54,7 +55,7 @@ namespace BarberShop_Api.Presentation
             return BadRequest("User or password invalid");
         }
 
-  
+
 
     }
 }

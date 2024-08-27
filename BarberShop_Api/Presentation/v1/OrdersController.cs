@@ -6,10 +6,11 @@ using BarberShop_Api.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Asp.Versioning;
 
-namespace BarberShop_Api.Presentation
+namespace BarberShop_Api.Presentation.v1
 {
-    [Route("/orders/")]
+    [Route("/v{version:ApiVersion}/orders/")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -55,7 +56,7 @@ namespace BarberShop_Api.Presentation
             var orders = _ordersRepository.Get(id, "CompanyID");
             List<DateTime> dateOrders = new();
 
-            foreach(var order in orders)
+            foreach (var order in orders)
             {
                 dateOrders.Add(order.HaircutDate);
             }

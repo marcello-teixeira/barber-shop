@@ -8,11 +8,11 @@ using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
 using BarberShop_Api.Application.DataTransfer;
 using BarberShop_Api.Application.Services;
+using Asp.Versioning;
 
-
-namespace BarberShop_Api.Presentation
+namespace BarberShop_Api.Presentation.v1
 {
-    [Route("/customer/")]
+    [Route("/v{version:ApiVersion}/customer/")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace BarberShop_Api.Presentation
         public CustomerController(IRepository<CustomerModel> customerRepository, IMapper mapper)
         {
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(customerRepository)); 
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(customerRepository));
         }
 
         [Authorize]
@@ -32,7 +32,7 @@ namespace BarberShop_Api.Presentation
         {
             var customers = _customerRepository.Get();
             List<CustomerDataTransfer> customerDataTrasnfer = new();
-            foreach(var customer in customers)
+            foreach (var customer in customers)
             {
                 customerDataTrasnfer.Add(_mapper.Map<CustomerDataTransfer>(customer));
             }
@@ -70,7 +70,7 @@ namespace BarberShop_Api.Presentation
                 Console.WriteLine(e.Message);
                 return NotFound("File not found");
             }
-            catch(DirectoryNotFoundException e)
+            catch (DirectoryNotFoundException e)
             {
                 Console.WriteLine(e.Message);
                 return NotFound("Directory not found");
@@ -85,30 +85,30 @@ namespace BarberShop_Api.Presentation
         {
             var customer = _customerRepository.GetByClaim();
 
-            if(customer == null || view.Photo == null)
+            if (customer == null || view.Photo == null)
             {
                 return BadRequest("Customer aren't exist or photo is null");
             }
-                        
+
             try
             {
-               string pathPhoto = _customerRepository.UploadArchive(view.Photo, customer.CPF);
+                string pathPhoto = _customerRepository.UploadArchive(view.Photo, customer.CPF);
 
                 if (!pathPhoto.IsNullOrEmpty())
                 {
                     _customerRepository.Patch(customer.Id, pathPhoto, "Photo");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-       
+
             return Ok();
         }
 
         [HttpPost]
-        public IActionResult AddCustomerEntity([FromForm]CustomerViewPost view)
+        public IActionResult AddCustomerEntity([FromForm] CustomerViewPost view)
         {
             string pathPhoto = "Storage/profileDefault";
 
@@ -139,11 +139,11 @@ namespace BarberShop_Api.Presentation
             {
                 _customerRepository.Delete(id);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest($"Fail deleted user {e}");
             }
-                       
+
             return Ok($"Customer °{id} has been deleted");
         }
 

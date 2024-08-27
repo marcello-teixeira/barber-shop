@@ -1,12 +1,12 @@
 ﻿using BarberShop_Api.Application.Services;
 using BarberShop_Api.Application.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+using Asp.Versioning;
 
-namespace BarberShop_Api.Presentation
+namespace BarberShop_Api.Presentation.v1
 {
     [ApiController]
-    [Route("/geolocation/")]
+    [Route("/v{version:ApiVersion}/geolocation/")]
     public class GeolocationController : ControllerBase
     {
 
@@ -14,7 +14,7 @@ namespace BarberShop_Api.Presentation
         public async Task<IActionResult> GeolocationReverse(Coords view)
         {
             ApiGeolocation apiGeolocation = new(view.Latitude, view.Longitude);
-            
+
             try
             {
                 await apiGeolocation.GetGeolocationAsync();
@@ -23,7 +23,7 @@ namespace BarberShop_Api.Presentation
             }
             catch (Exception ex)
             {
-               return StatusCode(500, ex.Message);
+                return StatusCode(500, ex.Message);
             }
         }
     }

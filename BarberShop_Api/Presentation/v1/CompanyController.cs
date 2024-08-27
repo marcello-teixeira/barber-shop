@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
+using Asp.Versioning;
 
-
-namespace BarberShop_Api.Presentation
+namespace BarberShop_Api.Presentation.v1
 {
-    [Route("/company/")]
+    [Route("/v{version:ApiVersion}/company/")]
     [ApiController]
     public class CompanyController : ControllerBase
     {
@@ -60,12 +60,12 @@ namespace BarberShop_Api.Presentation
 
             try
             {
-               if(company == null)
-               {
-                  return BadRequest("Company or photo doesn't exist");
-               }
+                if (company == null)
+                {
+                    return BadRequest("Company or photo doesn't exist");
+                }
 
-               bytePhoto = System.IO.File.ReadAllBytes(company.Photo);
+                bytePhoto = System.IO.File.ReadAllBytes(company.Photo);
             }
             catch (FileNotFoundException e)
             {
@@ -93,7 +93,7 @@ namespace BarberShop_Api.Presentation
             }
 
             try
-            {   
+            {
                 string pathPhoto = _companyRepository.UploadArchive(view.Photo, company.CNPJ);
 
                 if (!pathPhoto.IsNullOrEmpty())
@@ -102,7 +102,7 @@ namespace BarberShop_Api.Presentation
                 }
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -132,7 +132,7 @@ namespace BarberShop_Api.Presentation
                 Phone: view.Phone,
                 AvaliableAgenda: true
                 ));
-            
+
 
             return Ok();
         }
@@ -159,9 +159,9 @@ namespace BarberShop_Api.Presentation
             var companies = _companyRepository.Get();
             bool isAvaliable;
 
-            foreach(var company in companies)
+            foreach (var company in companies)
             {
-                if(company.CNPJ == view.Document)
+                if (company.CNPJ == view.Document)
                 {
                     return Ok(false);
                 }
