@@ -36,6 +36,7 @@ using System.Reflection;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ae0c3968c7acad4d3bb2147e5967990aaf9c66b")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f93edfd8e645bf77c4622a3527ed65956abaf186")]
@@ -103,6 +104,9 @@ using System.Reflection;
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9730d7328065e05a4431f3d77fc6a38347c7dc98")]
 >>>>>>> b1806ab (Swagger Folder Add)
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3dfae57ece1b4faeebd491c57fbf5b011ababa5b")]
+>>>>>>> 5f37af9 (Alter gitignore)
 [assembly: System.Reflection.AssemblyProductAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

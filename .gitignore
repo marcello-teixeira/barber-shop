@@ -1,7 +1,13 @@
 .vs/
 
+<<<<<<< HEAD
 *.AssemblyInfo.cs
 
 *.AssemblyInfo.cs
 
 *.env
+=======
+*.env
+
+obj/
+>>>>>>> 5f37af9 (Alter gitignore)
