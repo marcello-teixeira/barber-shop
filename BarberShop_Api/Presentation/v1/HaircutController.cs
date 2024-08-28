@@ -21,6 +21,7 @@ namespace BarberShop_Api.Presentation.v1
         public HaircutController(IRepository<HaircutModel> haircutRepository, IMapper mapper)
         {
             _haircutRepository = haircutRepository ?? throw new ArgumentNullException(nameof(haircutRepository));
+            // Variable that will make automapping
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 

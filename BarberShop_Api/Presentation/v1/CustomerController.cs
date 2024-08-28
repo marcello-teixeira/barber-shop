@@ -23,6 +23,7 @@ namespace BarberShop_Api.Presentation.v1
         public CustomerController(IRepository<CustomerModel> customerRepository, IMapper mapper)
         {
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
+            // Variable that will make automapping
             _mapper = mapper ?? throw new ArgumentNullException(nameof(customerRepository));
         }
 

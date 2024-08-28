@@ -4,11 +4,14 @@ namespace BarberShop_Api.Application.Services
 {
     public class ApiGeolocation
     {
+        /// <summary>
+        /// Initialize two values to get geolocation reverse
+        /// </summary>
         public ApiGeolocation(string latitude, string longitude)
         {
             _latitude = latitude;
             _longitude = longitude;
-
+            
             // Charge enviroment variables 
             DotEnv.Load();
 
@@ -26,8 +29,10 @@ namespace BarberShop_Api.Application.Services
         private readonly string _latitude;
         private readonly string _longitude;
 
-        // Send latitude and longitude to API OpenCageData endpoint, then get the response.
-        public async Task GetGeolocationAsync()
+        /// <summary>
+        /// Send latitude and longitude to API OpenCageData endpoint, then get the response.
+        /// </summary>
+        public async Task GetGeolocation()
         {
            using(HttpClient client = new())
             {

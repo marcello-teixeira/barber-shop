@@ -28,14 +28,15 @@ namespace BarberShop_Api.Presentation.v1
             var customers = _customerRepository.Get();
             var companies = _companyRepository.Get();
 
-
+            // Store in Hash-256 password client sent
             string DecryptPassword = EncryptCode.TransformCode256Hash(view.Password);
 
             foreach (var customer in customers)
             {
                 if ((customer.Name == view.Login || customer.Email == view.Login) && customer.Password == DecryptPassword)
                 {
-                    var token = TokenService.GenerateTokenCustomer(customer);
+                    // Call the method to get the token and store claims
+                    var token = TokenService.GenerateToken(customer);
                     string role = "customer";
                     return Ok(new { token, role });
                 }
@@ -45,7 +46,8 @@ namespace BarberShop_Api.Presentation.v1
             {
                 if ((company.Name == view.Login || company.Email == view.Login) && company.Password == DecryptPassword)
                 {
-                    object token = TokenService.GenerateTokenCustomer(company);
+                    // Call the method to get the token and store claims
+                    object token = TokenService.GenerateToken(company);
                     string role = "company";
 
                     return Ok(new { token, role });

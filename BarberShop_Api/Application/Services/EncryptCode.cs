@@ -5,6 +5,9 @@ namespace BarberShop_Api.Application.Services
 {
     public class EncryptCode
     {
+        /// <summary>
+        ///  Transform a string in a hash-256 encrypted
+        /// </summary>
         public static string TransformCode256Hash(string code)
         {
             using (SHA256 sha256 = SHA256.Create())

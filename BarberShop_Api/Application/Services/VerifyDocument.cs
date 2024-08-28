@@ -2,6 +2,9 @@
 {
     public class VerifyDocument
     {
+        /// <summary>
+        ///  Verifies if there is a CNPJ or CPF is avaliable
+        /// </summary>
         public static bool Verify(string document)
         {
             int totalFirst = 0;
@@ -9,6 +12,7 @@
 
             document = new string(document.Where(char.IsDigit).ToArray());
 
+            // Consulting CPF
             if (document.Length == 11)
             {
 
@@ -37,6 +41,7 @@
                 return secondResult == (int)char.GetNumericValue(document[10]);
             }
 
+            // Consulting CNPJ
             if (document.Length == 14)
             {
                 int[] weightFirst = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];

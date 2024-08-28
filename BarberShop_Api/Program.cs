@@ -12,8 +12,7 @@ using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using BarberShop_Api.Application.SwaggerOptions;
 
-
-
+// Get a random key
 byte[] key = Encoding.Default.GetBytes(GenerateKey.Private);
 
 var builder = WebApplication.CreateBuilder(args);

@@ -19,10 +19,10 @@ namespace BarberShop_Api.Presentation.v1
         private readonly IRepository<CompanyModel> _companyRepository;
         private readonly IMapper _mapper;
 
-
         public CompanyController(IRepository<CompanyModel> companyRepository, IMapper mapper)
         {
             _companyRepository = companyRepository ?? throw new ArgumentNullException(nameof(companyRepository));
+            // Variable that will make automapping
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -31,13 +31,13 @@ namespace BarberShop_Api.Presentation.v1
         public IActionResult GetAllCompanies()
         {
             var companies = _companyRepository.Get();
+
             List<CompanyDataTransfer> companiesDataTransfer = new();
 
             foreach (var item in companies)
             {
                 companiesDataTransfer.Add(_mapper.Map<CompanyDataTransfer>(item));
             }
-
 
             return Ok(companiesDataTransfer);
         }
@@ -56,7 +56,7 @@ namespace BarberShop_Api.Presentation.v1
         public IActionResult GetPhotoCompany()
         {
             var company = _companyRepository.GetByClaim();
-            byte[] bytePhoto = [];
+            byte[] bytePhoto;
 
             try
             {

@@ -15,15 +15,12 @@ namespace BarberShop_Api.Presentation.v1
     public class OrdersController : ControllerBase
     {
         private readonly IRepository<OrdersModel> _ordersRepository;
-        private readonly IRepository<CustomerModel> _customerRepository;
-        private readonly IRepository<CompanyModel> _companyRepository;
         private readonly IMapper _mapper;
 
         public OrdersController(IRepository<OrdersModel> ordersRepository, IRepository<CustomerModel> customerRepository, IRepository<CompanyModel> companyRepository, IMapper mapper)
         {
             _ordersRepository = ordersRepository ?? throw new ArgumentNullException(nameof(ordersRepository));
-            _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
-            _companyRepository = companyRepository ?? throw new ArgumentNullException(nameof(companyRepository));
+            // Variable that will make automapping
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 

@@ -17,7 +17,7 @@ namespace BarberShop_Api.Presentation.v1
 
             try
             {
-                await apiGeolocation.GetGeolocationAsync();
+                await apiGeolocation.GetGeolocation();
 
                 return Ok(apiGeolocation.Geolocation);
             }

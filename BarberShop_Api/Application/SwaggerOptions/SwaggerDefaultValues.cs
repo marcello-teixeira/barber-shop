@@ -7,6 +7,7 @@ namespace BarberShop_Api.Application.SwaggerOptions
 {
     public class SwaggerDefaultValues : IOperationFilter
     {
+        // Get information about API operations and contexts
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             ApiDescription apiDescription = context.ApiDescription;
@@ -18,6 +19,7 @@ namespace BarberShop_Api.Application.SwaggerOptions
                 return;
             }
 
+            // Iterates about parameters and bind its descriptions
             foreach(OpenApiParameter parameter in operation.Parameters)
             {
                 ApiParameterDescription desc = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);

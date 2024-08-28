@@ -38,6 +38,7 @@ using System.Reflection;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ae0c3968c7acad4d3bb2147e5967990aaf9c66b")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f93edfd8e645bf77c4622a3527ed65956abaf186")]
@@ -111,6 +112,9 @@ using System.Reflection;
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f37af969a11c5cb028ba6d4eb3727ff77ac3156")]
 >>>>>>> 3e58099 (Add API Versionament)
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3e58099c8b3da4d79dad37b0e2f03ab4fd0c1789")]
+>>>>>>> cb09282 (Create all notes)
 [assembly: System.Reflection.AssemblyProductAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -9,9 +9,13 @@ namespace BarberShop_Api.Application.Services
 {
     public class TokenService
     {
+        // Keeps the token that has been generate in GenerateToken
         private static string? tokenJwt;
 
-        public static object GenerateTokenCustomer<T>(T entity)
+        /// <summary>
+        ///  Make a token and claims about a generic entity
+        /// </summary>
+        public static object GenerateToken<T>(T entity)
         {
             byte[] key = Encoding.Default.GetBytes(GenerateKey.Private);
 
@@ -41,6 +45,9 @@ namespace BarberShop_Api.Application.Services
             return new { tokenJwt };
         }
 
+        /// <summary>
+        ///  Return all claims of one token
+        /// </summary>
         public static IEnumerable<Claim> GetClaims()
         {
             if(tokenJwt == null)
