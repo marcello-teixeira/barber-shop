@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JFHY97LflkZwefb/1nXPL018xsU75+FNY8GjiTdbI6FcBZxuvnrJaznOltQ5D3bzP+/xCo0AJ1g8z3VE/8tNZw==",
+  "dgSpecHash": "+BJwZac2ebThvOrDlcSPywQawV8rV08dq0Ci1gAqLMXFD9x6xh/1nLjqOuQAz/mPMM7uKvdpRmMTG0Ha159AUg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marce\\source\\repos\\BarberShop\\BarberShop_Api\\BarberShop_Api\\BarberShop_Api.csproj",
+  "projectFilePath": "C:\\Users\\marce\\source\\repos\\BarberShop\\barber-shop-api\\BarberShop_Api\\BarberShop_Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marce\\.nuget\\packages\\asp.versioning.abstractions\\8.1.0\\asp.versioning.abstractions.8.1.0.nupkg.sha512",
     "C:\\Users\\marce\\.nuget\\packages\\asp.versioning.http\\8.1.0\\asp.versioning.http.8.1.0.nupkg.sha512",

@@ -1,4 +1,5 @@
 .vs/
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 *.AssemblyInfo.cs
@@ -11,3 +12,6 @@
 
 obj/
 >>>>>>> 5f37af9 (Alter gitignore)
+=======
+*.env
+>>>>>>> a68d025 (Docker config finish)

@@ -20,7 +20,7 @@ namespace BarberShop_Api.Application.Mapping
     {
     }
 
-    public class CustomerMapping : Mapping<CompanyModel, CustomerDataTransfer>
+    public class CustomerMapping : Mapping<CustomerModel, CustomerDataTransfer>
     {
     }
 

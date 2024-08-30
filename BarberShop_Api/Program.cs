@@ -11,6 +11,7 @@ using System.Text;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using BarberShop_Api.Application.SwaggerOptions;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 // Get a random key
 byte[] key = Encoding.Default.GetBytes(GenerateKey.Private);
@@ -83,7 +84,7 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(name: "DefaultPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:9000");
+        policy.WithOrigins("http://client");
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
     });
@@ -109,27 +110,30 @@ builder.Services.AddAuthentication(opt =>
 });                      
 
 
-builder.Services.AddDbContext<ConnectionContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServerConnetion")));
+builder.Services.AddDbContext<ConnectionContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServerConnection")));
 
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope()) {
+    var DbContext = scope.ServiceProvider.GetRequiredService<ConnectionContext>();
+    DbContext.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(opt =>
-    {
-        var apiInfo = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
-        foreach(var info in apiInfo.ApiVersionDescriptions)
-        {
-            opt.SwaggerEndpoint($"/swagger/{info.GroupName}/swagger.json", $"BarberShop - {info.GroupName}");
-        }
-    });
-}
+app.UseSwagger();
+app.UseSwaggerUI(opt =>
+{
+    var apiInfo = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+    foreach(var info in apiInfo.ApiVersionDescriptions)
+    {
+        opt.SwaggerEndpoint($"/swagger/{info.GroupName}/swagger.json", $"BarberShop - {info.GroupName}");
+    }
+});
+
 
 app.UseHttpsRedirection();
 
