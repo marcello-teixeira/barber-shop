@@ -25,6 +25,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 4b2ab9c52567e6eeb218e2acd74f7663d872fa8eced6da9a79c4c980c31cb0bb
 =======
 95569133bda8fcba33e996f9187ac92f1d80f0dd608a2ed190f9320e58e93372
@@ -107,3 +108,6 @@ ca366a28ef488ca908c6e9718c102f9d388117785ad773d451b24a089ec1afc5
 =======
 d8bcd9549d3833942e09659ca7974ac40fd3bda6ed1ef13a1a59dc2b17bb9339
 >>>>>>> a68d025 (Docker config finish)
+=======
+009c8e79f3d4f55cdd99a1c6dd074c6d324c32636b8ec94a8ef55c55e6c91254
+>>>>>>> 59bd0e2 (fix docker-compose)

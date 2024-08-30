@@ -129,8 +129,7 @@ namespace BarberShop_Api.Presentation.v1
                 Photo: pathString,
                 Email: view.Email,
                 Password: EncriptedPassword,
-                Phone: view.Phone,
-                AvaliableAgenda: true
+                Phone: view.Phone
                 ));
 
 

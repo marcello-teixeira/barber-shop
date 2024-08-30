@@ -6,7 +6,7 @@ namespace BarberShop_Api.Domain.Models
     [Table("Company")]
     public class CompanyModel
     {
-        public CompanyModel(string Name, string Location, bool AvaliableAgenda, string CNPJ, string Photo, 
+        public CompanyModel(string Name, string Location, string CNPJ, string Photo, 
             string Email, string Password, string Phone)
         {
             this.Name = Name;
@@ -16,7 +16,6 @@ namespace BarberShop_Api.Domain.Models
             this.Email = Email;
             this.Password = Password;
             this.Phone = Phone;
-            this.AvaliableAgenda = AvaliableAgenda;
         }
         [Key]
         public int Id { get; private set; }
@@ -27,6 +26,5 @@ namespace BarberShop_Api.Domain.Models
         public string Email { get; private set; }
         public string? Phone { get; private set; }
         public string Password { get; private set; }
-        public bool AvaliableAgenda { get; private set; }
     }
 }

@@ -2,8 +2,8 @@
 {
     public class HaircutDataTransfer
     {
-        public int Id { get; private set; }
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public required string Name { get; set; }
         public decimal Cost { get; set; }
     }
 }
