@@ -2,18 +2,16 @@ version: '3.8'
 
 services:
   client:
-    image: marcelloteixeira/barbershop-client:1.0
-    container_name: client
+    image: marcelloteixeira/barbershop-client:2.0
+    container_name: client-container
     ports:
       - "80:80"
     depends_on:
       - api
       - sqlserver
-    networks:
-      - barbershop
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest 
-    container_name: sqlserver
+    container_name: sqlserver-container
     environment:
       - SA_PASSWORD
       - ACCEPT_EULA
@@ -22,12 +20,12 @@ services:
     volumes:
       - database-data:/var/opt/mssql
     networks:
-      - barbershop
+      - barbershop-backend
   api:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: api
+    container_name: api-container
     ports: 
       - "8080:8080"
     depends_on:
@@ -36,11 +34,11 @@ services:
       - ConnectionStrings__SQLServerConnection
       - API_KEY
     networks:
-      - barbershop
+      - barbershop-backend
 volumes:
   database-data:    
 networks:
-  barbershop:
+  barbershop-backend:
     driver: bridge
 
 
