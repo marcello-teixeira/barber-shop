@@ -84,7 +84,7 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(name: "DefaultPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost");
+        policy.AllowAnyOrigin();
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
     });
@@ -116,23 +116,28 @@ builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope()) {
+using (var scope = app.Services.CreateScope())
+{
     var DbContext = scope.ServiceProvider.GetRequiredService<ConnectionContext>();
     DbContext.Database.Migrate();
 }
 
 // Configure the HTTP request pipeline.
 
-app.UseSwagger();
-app.UseSwaggerUI(opt =>
+if (app.Environment.IsDevelopment())
 {
-    var apiInfo = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-
-    foreach(var info in apiInfo.ApiVersionDescriptions)
+    app.UseSwagger();
+    app.UseSwaggerUI(opt =>
     {
-        opt.SwaggerEndpoint($"/swagger/{info.GroupName}/swagger.json", $"BarberShop - {info.GroupName}");
-    }
-});
+        var apiInfo = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+        foreach(var info in apiInfo.ApiVersionDescriptions)
+        {
+            opt.SwaggerEndpoint($"/swagger/{info.GroupName}/swagger.json", $"BarberShop - {info.GroupName}");
+        }
+    });
+
+}
 
 
 app.UseHttpsRedirection();

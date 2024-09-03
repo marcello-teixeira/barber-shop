@@ -282,7 +282,6 @@ C:\Users\marce\source\repos\BarberShop\BarberShop_Api\BarberShop_Api\bin\Debug\n
 C:\Users\marce\source\repos\BarberShop\BarberShop_Api\BarberShop_Api\bin\Debug\net8.0\Asp.Versioning.Http.dll
 C:\Users\marce\source\repos\BarberShop\BarberShop_Api\BarberShop_Api\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
 C:\Users\marce\source\repos\BarberShop\BarberShop_Api\BarberShop_Api\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll
-C:\Users\marce\source\repos\BarberShop\barber-shop-api\BarberShop_Api\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\marce\source\repos\BarberShop\barber-shop-api\BarberShop_Api\bin\Debug\net8.0\appsettings.json
 C:\Users\marce\source\repos\BarberShop\barber-shop-api\BarberShop_Api\bin\Debug\net8.0\BarberShop_Api.exe
 C:\Users\marce\source\repos\BarberShop\barber-shop-api\BarberShop_Api\bin\Debug\net8.0\BarberShop_Api.deps.json
