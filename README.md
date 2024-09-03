@@ -2,12 +2,13 @@
   <b>BarbShop - API</b>
   <img src="https://i.pinimg.com/originals/ce/2e/b5/ce2eb5c24ec4ea4a59ec9a82905765d8.png" width="50"> 
   <br>
-  <b>BarbShop - API is responsabily for connection between <a href="https://github.com/marcello-teixeira/barber-shop-client">web page</a> and the database made in SQLSERVER.</b>
 </h1>
+
+BarbShop - API is responsible for the connection between the <a href="https://github.com/marcello-teixeira/barber-shop-client">web page</a> and the SQLSERVER database.
 
 # Description 📝
 
-This RESTful API is a standard CRUD. Implemention another <a href="https://api.opencagedata.com">API Geolocation</a> and did a few methods about check documents, tokens and DTOs.
+This is a RESTful API that follows standard CRUD operations. It also integrates a <a href="https://api.opencagedata.com">Geolocation API</a> and includes some methods for documents verification, handler tokens and generate DTOs.
 
 # Languages and Tools 🛠️
 
