@@ -26,3 +26,13 @@ This is a RESTful API that follows standard CRUD operations. It also integrates 
   <br>
 
 - SQL SERVER 14.0
+
+# Enviroment Variables
+
+Tha enviroment variables are processed by docker-compose.yml. They are:
+
+- API_KEY = API KEY of the Open Cage Data. 
+- SA_PASSWORD = Database system administrator password 
+- ACCEPT_EULA = Accept eula. Y or N.
+- ConnectionStrings__SQLServerConnection = Server=Docker-Service-Name;Database=barbershop;User Id=sa;Password=*********;
+
