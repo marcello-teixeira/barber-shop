@@ -37,8 +37,6 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.ConfigureOptions<ConfigSwaggerGenOptions>();
 
-
-
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(x =>
@@ -73,6 +71,10 @@ builder.Services.AddSwaggerGen(x =>
     });
 });
 
+//
+// Entities's DTOs 
+//
+
 builder.Services.AddAutoMapper(typeof(CompanyMapping));
 builder.Services.AddAutoMapper(typeof(CustomerMapping));
 builder.Services.AddAutoMapper(typeof(HaircutMapping));
@@ -84,7 +86,7 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(name: "DefaultPolicy", policy =>
     {
-        policy.AllowAnyOrigin();
+        policy.WithOrigins("https://webpage-barbershop.azurewebsites.net");
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
     });
@@ -116,13 +118,19 @@ builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
+//
+// Initial migration 
+//
+
 using (var scope = app.Services.CreateScope())
 {
     var DbContext = scope.ServiceProvider.GetRequiredService<ConnectionContext>();
     DbContext.Database.Migrate();
 }
 
-// Configure the HTTP request pipeline.
+//
+// Configure the Swagger Versionament and UI
+//
 
 if (app.Environment.IsDevelopment())
 {
@@ -138,9 +146,6 @@ if (app.Environment.IsDevelopment())
     });
 
 }
-
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
