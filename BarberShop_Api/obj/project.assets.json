@@ -5130,11 +5130,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marce\\source\\repos\\BarberShop\\barber-shop-api\\BarberShop_Api\\BarberShop_Api.csproj",
+      "projectUniqueName": "C:\\Users\\marce\\Desktop\\barber-shop-api\\BarberShop_Api\\BarberShop_Api.csproj",
       "projectName": "BarberShop_Api",
-      "projectPath": "C:\\Users\\marce\\source\\repos\\BarberShop\\barber-shop-api\\BarberShop_Api\\BarberShop_Api.csproj",
+      "projectPath": "C:\\Users\\marce\\Desktop\\barber-shop-api\\BarberShop_Api\\BarberShop_Api.csproj",
       "packagesPath": "C:\\Users\\marce\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marce\\source\\repos\\BarberShop\\barber-shop-api\\BarberShop_Api\\obj\\",
+      "outputPath": "C:\\Users\\marce\\Desktop\\barber-shop-api\\BarberShop_Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marce\\AppData\\Roaming\\NuGet\\NuGet.Config",
