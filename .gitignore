@@ -7,6 +7,7 @@
 *.AssemblyInfo.cs
 
 *.env
+<<<<<<< HEAD
 =======
 *.env
 
@@ -15,3 +16,7 @@ obj/
 =======
 *.env
 >>>>>>> a68d025 (Docker config finish)
+=======
+.github/
+*bin/
+>>>>>>> d827927 (Deploy concluded)

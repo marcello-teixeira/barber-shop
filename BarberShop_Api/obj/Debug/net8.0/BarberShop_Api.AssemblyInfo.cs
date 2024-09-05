@@ -44,6 +44,7 @@ using System.Reflection;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ae0c3968c7acad4d3bb2147e5967990aaf9c66b")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f93edfd8e645bf77c4622a3527ed65956abaf186")]
@@ -138,6 +139,9 @@ using System.Reflection;
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+319fa15ba734c090f6aa2dda7509029485ded82e")]
 >>>>>>> e0c359b (Deploy config finish)
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0c359bed61b2ca59f6586c4d6fe8c4fe18fd6e9")]
+>>>>>>> d827927 (Deploy concluded)
 [assembly: System.Reflection.AssemblyProductAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
