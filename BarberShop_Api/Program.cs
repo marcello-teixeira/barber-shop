@@ -44,7 +44,7 @@ builder.Services.AddSwaggerGen(x =>
     x.OperationFilter<SwaggerDefaultValues>();
 
     x.AddSecurityDefinition(
-        "Bearer", new OpenApiSecurityScheme()
+        "Bea", new OpenApiSecurityScheme()
         {
             Name = "Authorization",
             In = ParameterLocation.Header,
@@ -122,11 +122,11 @@ var app = builder.Build();
 // Initial migration 
 //
 
-using (var scope = app.Services.CreateScope())
+/*using (var scope = app.Services.CreateScope())
 {
     var DbContext = scope.ServiceProvider.GetRequiredService<ConnectionContext>();
     DbContext.Database.Migrate();
-}
+}*/
 
 //
 // Configure the Swagger Versionament and UI

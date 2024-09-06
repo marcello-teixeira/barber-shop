@@ -28,29 +28,35 @@ namespace BarberShop_Api.Presentation.v1
             var customers = _customerRepository.Get();
             var companies = _companyRepository.Get();
 
-            // Store in Hash-256 password client sent
+            // Get password client sent by view to equals password storaged
             string DecryptPassword = EncryptCode.TransformCode256Hash(view.Password);
+            string role = view.Role;
 
-            foreach (var customer in customers)
+            if(view.Role == "customer")
             {
-                if (customer.Email == view.Login && customer.Password == DecryptPassword)
+                foreach (var customer in customers)
                 {
-                    // Call the method to get the token and store claims
-                    var token = TokenService.GenerateToken(customer);
-                    string role = "customer";
-                    return Ok(new { token, role });
+                    if (customer.Email == view.Login && customer.Password == DecryptPassword)
+                    {
+                        // Call the method to get the token and store claims
+                        var token = TokenService.GenerateToken(customer);
+
+                        return Ok(new { token, role });
+                    }
                 }
             }
 
-            foreach (var company in companies)
+            if (view.Role == "company")
             {
-                if (company.Email == view.Login && company.Password == DecryptPassword)
+                foreach (var company in companies)
                 {
-                    // Call the method to get the token and store claims
-                    object token = TokenService.GenerateToken(company);
-                    string role = "company";
+                    if (company.Email == view.Login && company.Password == DecryptPassword)
+                    {
+                        // Call the method to get the token and store claims
+                        object token = TokenService.GenerateToken(company);
 
-                    return Ok(new { token, role });
+                        return Ok(new { token, role });
+                    }
                 }
             }
 

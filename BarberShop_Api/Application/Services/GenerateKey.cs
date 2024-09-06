@@ -8,12 +8,12 @@ namespace BarberShop_Api.Application.Services
         /// <summary>
         /// Store the private key
         /// </summary>
-        public static string Private { get; private set; } = GeneretedKey();
+        public static string Private { get; private set; } = GenereteKey();
 
         /// <summary>
         ///  Make a random key asynchronous
         /// </summary>
-        private static string GeneretedKey()
+        private static string GenereteKey()
         {
             StringBuilder BuilderKey = new();
 
