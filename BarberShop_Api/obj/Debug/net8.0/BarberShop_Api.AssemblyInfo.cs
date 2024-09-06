@@ -48,6 +48,7 @@ using System.Reflection;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ae0c3968c7acad4d3bb2147e5967990aaf9c66b")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f93edfd8e645bf77c4622a3527ed65956abaf186")]
@@ -151,6 +152,9 @@ using System.Reflection;
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d732dd02e5354662dda726a5f99aaa7ad2ef8b19")]
 >>>>>>> 8f98875 (Delete insert data by migrations")
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d732dd02e5354662dda726a5f99aaa7ad2ef8b19")]
+>>>>>>> b968b66 (Delete insert data bi migrations)
 [assembly: System.Reflection.AssemblyProductAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarberShop_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

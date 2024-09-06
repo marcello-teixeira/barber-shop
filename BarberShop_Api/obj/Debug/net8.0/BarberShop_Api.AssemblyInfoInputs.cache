@@ -32,6 +32,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 4b2ab9c52567e6eeb218e2acd74f7663d872fa8eced6da9a79c4c980c31cb0bb
 =======
 95569133bda8fcba33e996f9187ac92f1d80f0dd608a2ed190f9320e58e93372
@@ -135,3 +136,6 @@ b3ff123d885bdac0f9af88f11bfca8aa1a953e43d6ac3d72c89d433c369f211f
 =======
 78cf0d98d12b49a40a9d0eea4209716b49b386dc48fda285ac4d90a52802f616
 >>>>>>> 8f98875 (Delete insert data by migrations")
+=======
+78cf0d98d12b49a40a9d0eea4209716b49b386dc48fda285ac4d90a52802f616
+>>>>>>> b968b66 (Delete insert data bi migrations)
