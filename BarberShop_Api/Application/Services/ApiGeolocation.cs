@@ -15,17 +15,17 @@ namespace BarberShop_Api.Application.Services
             // Charge enviroment variables 
             DotEnv.Load();
 
-            _apiKey = Environment.GetEnvironmentVariable("API_KEY") ?? "";
+            _apiKeyGeolocation = Environment.GetEnvironmentVariable("API_KEY_GEOLOCATION") ?? "";
 
-            if (string.IsNullOrEmpty(_apiKey))
+            if (string.IsNullOrEmpty(_apiKeyGeolocation))
             {
-                throw new InvalidOperationException("API key is not defined");
+                throw new InvalidOperationException(nameof(_apiKeyGeolocation));
             }
         }
 
-        public object? Geolocation { get; private set; }
+        public object? Location { get; private set; }
 
-        private readonly string _apiKey;
+        private readonly string _apiKeyGeolocation;
         private readonly string _latitude;
         private readonly string _longitude;
 
@@ -38,13 +38,13 @@ namespace BarberShop_Api.Application.Services
             {
                 try
                 {
-                    string url = $"https://api.opencagedata.com/geocode/v1/json?q={_latitude}+{_longitude}&key={_apiKey}";
+                    string url = $"https://api.opencagedata.com/geocode/v1/json?q={_latitude}+{_longitude}&key={_apiKeyGeolocation}";
 
                     HttpResponseMessage response = await client.GetAsync(url);
 
                     response.EnsureSuccessStatusCode();
 
-                    Geolocation = await response.Content.ReadAsStringAsync();
+                    Location = await response.Content.ReadAsStringAsync();
                 } 
                 catch(HttpRequestException ex)
                 {

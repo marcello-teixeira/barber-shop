@@ -19,4 +19,8 @@ obj/
 =======
 .github/
 *bin/
+<<<<<<< HEAD
 >>>>>>> d827927 (Deploy concluded)
+=======
+*obj/
+>>>>>>> d732dd0 (Names and configues update)

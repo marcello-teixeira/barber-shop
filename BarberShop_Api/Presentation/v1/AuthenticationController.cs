@@ -33,7 +33,7 @@ namespace BarberShop_Api.Presentation.v1
 
             foreach (var customer in customers)
             {
-                if ((customer.Name == view.Login || customer.Email == view.Login) && customer.Password == DecryptPassword)
+                if (customer.Email == view.Login && customer.Password == DecryptPassword)
                 {
                     // Call the method to get the token and store claims
                     var token = TokenService.GenerateToken(customer);
@@ -44,7 +44,7 @@ namespace BarberShop_Api.Presentation.v1
 
             foreach (var company in companies)
             {
-                if ((company.Name == view.Login || company.Email == view.Login) && company.Password == DecryptPassword)
+                if (company.Email == view.Login && company.Password == DecryptPassword)
                 {
                     // Call the method to get the token and store claims
                     object token = TokenService.GenerateToken(company);

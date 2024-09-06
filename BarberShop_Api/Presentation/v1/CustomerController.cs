@@ -142,7 +142,7 @@ namespace BarberShop_Api.Presentation.v1
             }
             catch (Exception e)
             {
-                return BadRequest($"Fail deleted user {e}");
+                return BadRequest($"Fail deleted user {e.Message}");
             }
 
             return Ok($"Customer °{id} has been deleted");
