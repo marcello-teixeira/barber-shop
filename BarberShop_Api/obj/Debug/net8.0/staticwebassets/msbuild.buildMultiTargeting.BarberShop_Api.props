@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\BarberShop_Api.props" />
-</Project>
