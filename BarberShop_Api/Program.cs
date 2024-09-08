@@ -122,11 +122,11 @@ var app = builder.Build();
 // Initial migration 
 //
 
-/*using (var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
     var DbContext = scope.ServiceProvider.GetRequiredService<ConnectionContext>();
     DbContext.Database.Migrate();
-}*/
+}
 
 //
 // Configure the Swagger Versionament and UI

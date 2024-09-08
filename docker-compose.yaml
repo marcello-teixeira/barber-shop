@@ -1,5 +1,17 @@
 name: "barbershop"
 services:
+  sqlserver:
+    container_name: sqlserver-database
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - SA_PASSWORD
+      - ACCEPT_EULA
+    volumes:
+      - database:/var/opt/mssql
+    ports:
+      - 1433:1433
+    networks:
+      - backend-network
   barbershop-api:
     container_name: barbershop-api
     environment:
@@ -15,20 +27,6 @@ services:
       - backend-network
     depends_on:
       - sqlserver
-
-  sqlserver:
-    container_name: sqlserver-database
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    environment:
-      - SA_PASSWORD
-      - ACCEPT_EULA
-    volumes:
-      - database:/var/opt/mssql
-    ports:
-      - 1433:1433
-    networks:
-      - backend-network
-
 volumes:
   database:
 networks:
