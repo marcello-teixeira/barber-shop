@@ -39,13 +39,13 @@ The database and API are hosted by Azure.
 
 The enviroment variables are:
 
-- API_KEY = Create an account at <a href="https://api.opencagedata.com">Open Cage Data</a> to get api key. 
+- API_KEY_GEOLOCATION = Create an account at <a href="https://api.opencagedata.com">Open Cage Data</a> to get api key. 
 - ConnectionStrings__SQLServerConnection = Server={server};Initial Catalog={database};User Id={user};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;
 
 ## Installation ⚙️
 
 1. Clone the repository.
-2. Check Docker are installed.
+2. Ensure the Docker are installed.
 3. Create a file named setup.env in the root like .env.example and add environment variables.
-4. Run command in the terminal: docker compose --env-file setup.env up.
+4. Run command: docker compose --env-file setup.env up
 5. The API will be available at http://localhost:8080 and documentation at http://localhost:8080/swagger.
