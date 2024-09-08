@@ -39,7 +39,7 @@ The database and API are hosted by Azure.
 
 The enviroment variables are:
 
-- API_KEY = Create an acconut at <a href="https://api.opencagedata.com">Open Cage Data</a> to get api key. 
+- API_KEY = Create an account at <a href="https://api.opencagedata.com">Open Cage Data</a> to get api key. 
 - ConnectionStrings__SQLServerConnection = Server={server};Initial Catalog={database};User Id={user};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;
 
 ## Installation ⚙️
