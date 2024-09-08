@@ -10,10 +10,10 @@ Swagger documentation: https://api-barbershop.azurewebsites.net/swagger.
 
 ## Summary
 
-- [Description](#description)
-- [Languages and Tools](#languages-and-tools)
-- [Deployment](#deployment)
-- [Installation](#installation)
+- [Description](##description)
+- [Languages and Technologies](##languages-and-technologies)
+- [Deployment](##deployment)
+- [Installation](##installation)
 
 ## Description 📝
 
