@@ -132,20 +132,18 @@ var app = builder.Build();
 // Configure the Swagger Versionament and UI
 //
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(opt =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(opt =>
+    var apiInfo = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+    foreach(var info in apiInfo.ApiVersionDescriptions)
     {
-        var apiInfo = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+        opt.SwaggerEndpoint($"/swagger/{info.GroupName}/swagger.json", $"BarberShop - {info.GroupName}");
+    }
+});
 
-        foreach(var info in apiInfo.ApiVersionDescriptions)
-        {
-            opt.SwaggerEndpoint($"/swagger/{info.GroupName}/swagger.json", $"BarberShop - {info.GroupName}");
-        }
-    });
 
-}
 
 app.UseAuthorization();
 
