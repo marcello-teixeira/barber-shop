@@ -47,5 +47,5 @@ The enviroment variables are:
 1. Clone the repository.
 2. Check Docker are installed.
 3. Create a file named setup.env in the root like .env.example and add environment variables.
-4. Run command: docker compose --env-file setup.env up -d in the terminal
+4. Run command: docker compose --env-file setup.env up in the terminal
 5. The API will be available at http://localhost:8080 and documentation at http://localhost:8080/swagger.
