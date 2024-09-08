@@ -1,0 +1,36 @@
+name: "barbershop"
+services:
+  barbershop-api:
+    container_name: barbershop-api
+    environment:
+      - ConnectionStrings__SQLServerConnection
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        version: latest
+    ports:
+      - 8080:8080
+    networks:
+      - backend-network
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    container_name: sqlserver-database
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - SA_PASSWORD
+      - ACCEPT_EULA
+    volumes:
+      - database:/var/opt/mssql
+    ports:
+      - 1433:1433
+    networks:
+      - backend-network
+
+volumes:
+  database:
+networks:
+  backend-network:
+    driver: bridge
