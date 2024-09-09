@@ -33,6 +33,8 @@ This is a RESTful API that follows standard CRUD operations. It also integrates 
 
 - SQL SERVER 14.0
 
+- Azure
+
 ## Deployment ☁️
 
 The database and API are hosted by Azure.
