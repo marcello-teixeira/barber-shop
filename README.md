@@ -1,6 +1,6 @@
 <h1 align="center">
   BarbShop - API
-  <img src="https://i.pinimg.com/originals/ce/2e/b5/ce2eb5c24ec4ea4a59ec9a82905765d8.png" width="50"> 
+  💈
   <br>
 </h1>
 
